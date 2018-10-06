@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <Button android:id="@+id/button1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Captured"/>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="136dp"
+        android:layout_height="193dp" />
+
+    <TextView
+        android:id="@+id/gender"
+        android:layout_width="172dp"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/age"
+        android:layout_width="172dp"
+        android:layout_height="wrap_content"
+        android:text="" />
+    <TextView
+        android:id="@+id/smile"
+        android:layout_width="172dp"
+        android:layout_height="wrap_content"
+        android:text="" />
+    <TextView
+        android:id="@+id/created"
+        android:layout_width="172dp"
+        android:layout_height="wrap_content"
+        android:text="CREATED BY FRANCIS DURANTE - POWERED BY MICROSOFT API" />
+
+</LinearLayout>

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -33,12 +34,13 @@ public class MainActivity extends Activity {
     private ImageView imageView;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private final String apiEndpoint = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0";
-    private final String subscriptionKey = "fa7aeb240b93e4a85q981906fb4c648e09d";
+    private final String subscriptionKey = "af7aeb240b93e4a8598190q6fb4c648e09d";
     private final FaceServiceClient faceServiceClient =
             new FaceServiceRestClient(apiEndpoint, subscriptionKey);
     static TextView age;
     static TextView gender;
     static TextView smile;
+    Context mContext = this;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,7 @@ public class MainActivity extends Activity {
         smile = findViewById(R.id.smile);
         this.imageView = (ImageView) this.findViewById(R.id.imageView1);
         Button photoButton = (Button) this.findViewById(R.id.button1);
+        Button map = (Button) this.findViewById(R.id.button2);
         photoButton.setOnClickListener(new View.OnClickListener() {
 
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -61,6 +64,17 @@ public class MainActivity extends Activity {
                     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, CAMERA_REQUEST);
                 }
+//                Intent map = new Intent(mContext,MapsActivity.class);
+//                startActivity(map);
+            }
+        });
+        map.setOnClickListener(new View.OnClickListener() {
+
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View v) {
+                Intent map = new Intent(mContext,MapsActivity.class);
+                startActivity(map);
             }
         });
     }

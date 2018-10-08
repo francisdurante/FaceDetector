@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     >
     <Button android:id="@+id/button1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Captured"/>
-
+    <Button android:id="@+id/button2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MAP"/>
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="136dp"
@@ -30,7 +30,7 @@
     <TextView
         android:id="@+id/created"
         android:layout_width="172dp"
-        android:layout_height="wrap_content"
-        android:text="CREATED BY FRANCIS DURANTE - POWERED BY MICROSOFT API" />
+        android:layout_height="wrap_content"/>
+        <!--android:text="CREATED BY FRANCIS DURANTE - POWERED BY MICROSOFT API" />-->
 
 </LinearLayout>

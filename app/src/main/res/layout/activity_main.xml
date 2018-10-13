@@ -31,6 +31,13 @@
         android:id="@+id/created"
         android:layout_width="172dp"
         android:layout_height="wrap_content"/>
-        <!--android:text="CREATED BY FRANCIS DURANTE - POWERED BY MICROSOFT API" />-->
+
+    <TextView
+        android:id="@+id/notregister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Not Register? Click Here"
+        android:onClick="registration"/>
+    <!--android:text="CREATED BY FRANCIS DURANTE - POWERED BY MICROSOFT API" />-->
 
 </LinearLayout>

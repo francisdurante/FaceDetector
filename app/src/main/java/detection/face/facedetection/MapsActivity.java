@@ -110,14 +110,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Value of destination
         String str_dest = "destination=" + dest.latitude+","+dest.longitude;
         //Set value enable the sensor
-        String sensor = "sensor=false";
+        String sensor = "sensor=true";
         //Mode for find direction
         String mode = "mode=driving";
         //Build the full param
         String param = str_org +"&" + str_dest + "&" +sensor+"&" +mode;
         //Output format
         String output = "json";
-        String key = "key=fAIzaSyDvsmff4xlQd88ENhjbsg-GzqoZon-4uKgUd";
+        String key = "key=AIzaSyDvsmff4xlQd88ENhjbsg-GzoZon-4uKgU";
         //Create url to request
         String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + param + "&" + key;
         return url;

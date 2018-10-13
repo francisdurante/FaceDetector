@@ -211,4 +211,8 @@ public class MainActivity extends Activity {
         }
         return bitmap;
     }
+    public void registration (View v){
+        Intent registration = new Intent(getApplicationContext(),RegistrationActivity.class);
+        startActivity(registration);
+    }
 }

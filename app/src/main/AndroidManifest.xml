@@ -25,7 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -51,7 +51,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDvsmff4xlQd88ENhjbsg-GzoZon-4uKgU" />
 
-        <activity android:name=".RegistrationActivity"></activity>
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

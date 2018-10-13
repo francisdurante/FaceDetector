@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -15,8 +16,10 @@ import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -37,10 +40,12 @@ public class MainActivity extends Activity {
     private final String subscriptionKey = "af7aeb240b93e4a8598190q6fb4c648e09d";
     private final FaceServiceClient faceServiceClient =
             new FaceServiceRestClient(apiEndpoint, subscriptionKey);
+    TextView loggedIn;
     static TextView age;
     static TextView gender;
     static TextView smile;
     Context mContext = this;
+    SharedPreferences spf;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +53,9 @@ public class MainActivity extends Activity {
         age = findViewById(R.id.age);
         gender = findViewById(R.id.gender);
         smile = findViewById(R.id.smile);
+        loggedIn = findViewById(R.id.logged_in);
+        String logged_in = "Logged In : " + getString("first_name") + " " + getString("last_name");
+        loggedIn.setText(logged_in);
         this.imageView = (ImageView) this.findViewById(R.id.imageView1);
         Button photoButton = (Button) this.findViewById(R.id.button1);
         Button map = (Button) this.findViewById(R.id.button2);
@@ -211,8 +219,25 @@ public class MainActivity extends Activity {
         }
         return bitmap;
     }
-    public void registration (View v){
-        Intent registration = new Intent(getApplicationContext(),RegistrationActivity.class);
-        startActivity(registration);
+    public void save(String key, String value) {
+
+        spf = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor edit = spf.edit();
+        edit.putString(key, value);
+        edit.apply();
+
+    }
+    public String getString(String key) {
+
+        spf = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        return spf.getString(key,"");
+    }
+    public void logout(View v){
+        save("first_name","");
+        save("last_name","");
+        save("account_id","");
+        Intent login = new Intent(getApplicationContext(),LoginActivity.class);
+        startActivity(login);
+        finish();
     }
 }

@@ -1,13 +1,40 @@
 package detection.face.facedetection;
 
 public class GlobalVO {
-    public static String registrationResponse = "";
+    static String registrationResponse = "";
+    static String firstName;
+    static String lastName;
+    static String accounId;
 
-    public static String getRegistrationResponse() {
+    static String getRegistrationResponse() {
         return registrationResponse;
     }
 
-    public static void setRegistrationResponse(String registrationResponse1) {
+    static void setRegistrationResponse(String registrationResponse1) {
         registrationResponse = registrationResponse1;
+    }
+
+    public static String getFirstName() {
+        return firstName;
+    }
+
+    public static void setFirstName(String firstName) {
+        GlobalVO.firstName = firstName;
+    }
+
+    public static String getLastname() {
+        return lastName;
+    }
+
+    public static void setLastname(String lastname) {
+        GlobalVO.lastName = lastname;
+    }
+
+    public static String getAccounId() {
+        return accounId;
+    }
+
+    public static void setAccounId(String accounId) {
+        GlobalVO.accounId = accounId;
     }
 }

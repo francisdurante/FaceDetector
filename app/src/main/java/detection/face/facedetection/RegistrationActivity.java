@@ -56,7 +56,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
             cTimer = new CountDownTimer(7000, 1000) {
                 public void onTick(long millisUntilFinished) {
-
                 }
                 @Override
                 public void onFinish() {

@@ -13,9 +13,13 @@ public class Constant {
     static final String EXISTING = "User Already Exist";
     static final String CONNECT_UNSUCCESSFUL = "Please Check Your Connecetion";
     static final String REGISTRATION_SUCCESS = "Registration Success";
+    static final String LOGIN_SUCCESS = "Login Success";
+    static final String INACTIVE_USER = "User is InActive";
+    static final String LOGIN_FAIL = "Login Fail";
 
 
 
-    public static final String REGISTRATION_URL = "https://darkened-career.000webhostapp.com/api/user_registration";
+    static final String REGISTRATION_URL = "https://darkened-career.000webhostapp.com/api/user_registration";
+    static final String LOGIN_URL = "https://darkened-career.000webhostapp.com/api/login";
 
 }

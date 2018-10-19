@@ -2,4 +2,6 @@
     <string name="app_name">Eatery Finder</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Map</string>
+    <string name="search_button">Search</string>
+    <string name="search_text">Search…</string>
 </resources>

@@ -74,8 +74,8 @@ public class LoginActivity extends AppCompatActivity {
                             save("first_name",GlobalVO.getFirstName());
                             save("last_name",GlobalVO.getLastname());
                             save("account_id",GlobalVO.getAccounId());
-                            Intent mainActivity = new Intent(getApplicationContext(),MainActivity.class);
-                            startActivity(mainActivity);
+                            Intent estList = new Intent(getApplicationContext(),EstablishmentListActivity.class);
+                            startActivity(estList);
                             finish();
                             Toast.makeText(getApplicationContext(),Constant.LOGIN_SUCCESS,Toast.LENGTH_SHORT).show();
                         }else{

@@ -51,8 +51,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDvsmff4xlQd88ENhjbsg-GzoZon-4uKgU" />
 
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".RegistrationActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

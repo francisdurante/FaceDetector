@@ -15,9 +15,15 @@
         android:layout_marginTop="0dp">
 
         <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background_image" />
+        <ImageView
             android:id="@+id/imageView"
             android:layout_width="290dp"
             android:layout_height="147dp"
+            android:src="@drawable/eateryfinderlogo"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -36,8 +42,10 @@
             android:layout_marginTop="17dp"
             android:layout_marginEnd="45dp"
             android:ems="10"
+            android:textColorHint="#FF00"
             android:hint="Username"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#FFFFFF" />
 
         <EditText
             android:id="@+id/password_login"
@@ -51,7 +59,9 @@
             android:layout_marginEnd="45dp"
             android:ems="10"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:textColorHint="#FF00"
+            android:inputType="textPassword"
+            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/login_button"
@@ -62,22 +72,23 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="50dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="35dp"
+            android:layout_marginEnd="45dp"
             android:onClick="login"
             android:text="login" />
 
         <TextView
             android:id="@+id/notregister"
             android:layout_width="wrap_content"
-            android:layout_height="37dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/login_button"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="54dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="33dp"
+            android:layout_marginEnd="43dp"
             android:onClick="registration"
-            android:text="Not Registered? Click Here" />
+            android:text="Not Registered? Click Here"
+            android:textColor="@color/colorAccent" />
 
     </RelativeLayout>
 </RelativeLayout>

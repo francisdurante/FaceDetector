@@ -30,7 +30,6 @@ public class ApiClass extends AsyncTask<Context,Void,String> {
                 "&first_name=" + firstName +
                 "&last_name=" + lastName +
                 "&password=" + password;
-        System.out.println(this.url + " llllllllllllll");
         this.requestCode = requestCode;
     }
 

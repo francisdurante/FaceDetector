@@ -52,7 +52,6 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     JSONArray data = new JSONArray(response.toString());
                 } catch (JSONException e) {
-                    System.out.println("aaaaaaaaaaaaaaaa");
                     e.printStackTrace();
                 }
             }

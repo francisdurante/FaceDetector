@@ -135,7 +135,8 @@ public class MainActivity extends Activity {
                                  new FaceServiceClient.FaceAttributeType[] {
                                     FaceServiceClient.FaceAttributeType.Age,
                                     FaceServiceClient.FaceAttributeType.Gender,
-                                    FaceServiceClient.FaceAttributeType.Smile}
+                                    FaceServiceClient.FaceAttributeType.Smile,
+                                    FaceServiceClient.FaceAttributeType.Emotion}
 
                             );
                             if (result == null){
@@ -209,12 +210,20 @@ public class MainActivity extends Activity {
                         paint);
                 gender.setText("GENDER: " + face.faceAttributes.gender);
                 age.setText("AGE: " + face.faceAttributes.age);
-                System.out.println(face.faceAttributes.smile + " aaaaaaaaaaaaaaaaaaaaa");
-                if(face.faceAttributes.smile > 0.4){
-                    smile.setText("SMILING");
-                }else{
-                    smile.setText("SAD");
-                }
+                Double[] emotion = {face.faceAttributes.emotion.contempt,
+                        face.faceAttributes.emotion.anger,
+                        face.faceAttributes.emotion.disgust,
+                        face.faceAttributes.emotion.fear,
+                        face.faceAttributes.emotion.happiness,
+                        face.faceAttributes.emotion.neutral,
+                        face.faceAttributes.emotion.sadness,
+                        face.faceAttributes.emotion.surprise};
+                smile.setText(getEmotion(emotion));
+//                if(face.faceAttributes.smile > 0.4){
+//                    smile.setText("SMILING");
+//                }else{
+//                    smile.setText("SAD");
+//                }
             }
         }
         return bitmap;
@@ -239,5 +248,31 @@ public class MainActivity extends Activity {
         Intent login = new Intent(getApplicationContext(),LoginActivity.class);
         startActivity(login);
         finish();
+    }
+
+    public static String getEmotion(Double[] emotions){
+        String emotion;
+        int largest = 0;
+        for(int x = 1; x < emotions.length; x++){
+            if(emotions[x] > emotions[largest]) largest = x;
+        }
+        if(largest == 0){
+            emotion = "Contempt";
+        }else if(largest == 1){
+            emotion = "Anger";
+        }else if(largest == 2){
+            emotion = "Disgust";
+        }else if(largest == 3){
+            emotion = "Fear";
+        }else if(largest == 4){
+            emotion = "Happiness";
+        }else if(largest == 5){
+            emotion = "Neutral";
+        }else if(largest == 6){
+            emotion = "Sadness";
+        }else{
+            emotion = "Suprise";
+        }
+        return emotion;
     }
 }

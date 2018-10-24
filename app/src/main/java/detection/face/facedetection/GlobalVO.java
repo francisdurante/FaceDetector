@@ -5,6 +5,8 @@ public class GlobalVO {
     static String firstName;
     static String lastName;
     static String accounId;
+    static String latidtude;
+    static String longitude;
 
     static String getRegistrationResponse() {
         return registrationResponse;
@@ -36,5 +38,21 @@ public class GlobalVO {
 
     public static void setAccounId(String accounId) {
         GlobalVO.accounId = accounId;
+    }
+
+    public static String getLatitude() {
+        return latidtude;
+    }
+
+    public static void setLatitude(String latitude) {
+        GlobalVO.latidtude = latitude;
+    }
+
+    public static String getLongitude() {
+        return longitude;
+    }
+
+    public static void setLongitude(String longitude) {
+        GlobalVO.longitude = longitude;
     }
 }

@@ -22,5 +22,7 @@ public class Constant {
     static final String REGISTRATION_URL = "https://darkened-career.000webhostapp.com/api/user_registration";
     static final String LOGIN_URL = "https://darkened-career.000webhostapp.com/api/login";
     static final String GET_REGISTERED_EST = "https://darkened-career.000webhostapp.com/api/get_all_est_user";
+    static final String PUBLIC_IMAGE_PATH = "https://darkened-career.000webhostapp.com/images/";
+    static final String GET_PRODUCT_BY_ESTABLISHMENT = "https://darkened-career.000webhostapp.com/api/get_est_product";
 
 }

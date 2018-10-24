@@ -105,9 +105,12 @@ public class EstablishmentListActivity extends AppCompatActivity {
                                 Picasso.with(getApplicationContext())
                                         .load(picUrl(datas.getString("est_front_store")))
                                         .into(imageView);
+                                imageView.setOnClickListener(new ClickEstablishment(datas.getString("establishment_name"),datas.getString("establishment_user_id")));
+
                                 TextView estName = view.findViewById(R.id.est_name);
                                 estName.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
                                 estName.setText(datas.getString("establishment_name"));
+                                estName.setOnClickListener(new ClickEstablishment(datas.getString("establishment_name"),datas.getString("establishment_user_id")));
 
                                 TextView estAddress = view.findViewById(R.id.est_address);
                                 estAddress.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
@@ -119,6 +122,7 @@ public class EstablishmentListActivity extends AppCompatActivity {
                                 ratingBar.setRating(3);
 
                                 scrollView.addView(view);
+                                System.out.println(" aaaaaaaaa");
                             }
                         }
                     }
@@ -131,6 +135,28 @@ public class EstablishmentListActivity extends AppCompatActivity {
     }
     public String picUrl(String path){
         String[] pic = path.split("/");
-        return "https://darkened-career.000webhostapp.com/images/" + pic[7];
+        return Constant.PUBLIC_IMAGE_PATH + pic[7];
     }
+    public class ClickEstablishment implements View.OnClickListener
+    {
+
+        String estName;
+        String id;
+        public ClickEstablishment(String key,String id) {
+            this.estName = key;
+            this.id = id;
+        }
+
+        @Override
+        public void onClick(View v)
+        {
+            Intent estProduct = new Intent(getApplicationContext(),EstablishmentDetailsActivity.class);
+            Bundle establishmentname = new Bundle();
+            establishmentname.putString("estName",estName);
+            establishmentname.putString("id",id);
+            estProduct.putExtras(establishmentname);
+            startActivity(estProduct);
+        }
+
+    };
 }

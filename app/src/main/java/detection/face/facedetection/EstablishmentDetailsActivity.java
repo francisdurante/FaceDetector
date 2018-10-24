@@ -1,5 +1,6 @@
 package detection.face.facedetection;
 
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,8 @@ public class EstablishmentDetailsActivity extends AppCompatActivity {
     LinearLayout scrollView = null;
     int length = 0;
     TextView estNameLayout = null;
+    String lon;
+    String lat;
     String id = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,11 +109,12 @@ public class EstablishmentDetailsActivity extends AppCompatActivity {
         rp.add("pass", "get_all_est_user");
         rp.add("key", estName);
 
-        Utility.getByUrl(Constant.GET_PRODUCT_BY_ESTABLISHMENT, rp, new JsonHttpResponseHandler() {
+        Utility.getByUrl(Constant.GET_REGISTERED_EST, rp, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 // If the response is JSONObject instead of expected JSONArray
                 try {
+                    System.out.println(response + " aaaaaaaaaaaaaaaaaaaaaa");
                     JSONArray data = new JSONArray(response.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -120,6 +124,7 @@ public class EstablishmentDetailsActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
+                    System.out.println(response + " aaaaaaaaaaaaaaaaaaaaaa");
                     JSONObject object = new JSONObject(response.toString());
                     String status = object.getString("status");
                     if ("success".equals(status)) {
@@ -129,8 +134,9 @@ public class EstablishmentDetailsActivity extends AppCompatActivity {
                         JSONObject datas = new JSONObject(array);
                         int estStatus = datas.getInt("est_status");
                         if (estStatus == 1) {
-                            GlobalVO.setLongitude(datas.getString("longitude"));
-                            GlobalVO.setLatitude(datas.getString("latitude"));
+                            lon = datas.getString("location_longitude");
+                            lat = datas.getString("location_latitude");
+                            System.out.println(lat+ " aaaaaa " + lon);
                         }
                     }
                 } catch (JSONException e) {
@@ -143,5 +149,15 @@ public class EstablishmentDetailsActivity extends AppCompatActivity {
     public String picUrl(String path){
         String[] pic = path.split("/");
         return Constant.PUBLIC_IMAGE_PATH + pic[7];
+    }
+
+    public void map (View v){
+        Bundle b = new Bundle();
+        b.putString("lat",lat);
+        b.putString("lon",lon);
+        System.out.println(lat+ " aaaaaa " + lon);
+        Intent map = new Intent(getApplicationContext(),MapsActivity.class);
+        map.putExtras(b);
+        startActivity(map);
     }
 }

@@ -3,12 +3,15 @@ package detection.face.facedetection;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -17,6 +20,7 @@ import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -41,23 +45,63 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,LocationListener {
     private GoogleMap mMap;
+    private LocationManager locationManager;
+    private static final long MIN_TIME = 400;
+    private static final float MIN_DISTANCE = 1000;
     private static final int LOCATION_REQUEST = 500;
+    ArrayList<LatLng> currentListPoints;
+    ArrayList<LatLng> destinationListPoints;
     ArrayList<LatLng> listPoints;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST);
+            return;
+        }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        listPoints = new ArrayList<>();
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DISTANCE, this); //You can also use LocationManager.GPS_PROVIDER and LocationManager.PASSIVE_PROVIDER
 
+        currentListPoints = new ArrayList<>();
+        destinationListPoints = new ArrayList<>();
     }
+    @Override
+    public void onLocationChanged(Location location) {
+        MarkerOptions markerOptions = new MarkerOptions();
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        markerOptions.position(latLng);
+        currentListPoints.add(latLng);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16);
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        mMap.addMarker(markerOptions);
+        mMap.animateCamera(cameraUpdate);
+        locationManager.removeUpdates(this);
+
+        Bundle b = getIntent().getExtras();
+        LatLng destinationLocation = new LatLng(Double.parseDouble(b.getString("lat")), Double.parseDouble(b.getString("lon")));
+        markerOptions.position(destinationLocation);
+        destinationListPoints.add(destinationLocation);
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mMap.addMarker(markerOptions).setTitle("Your Destination");
+        String url = getRequestUrl(currentListPoints.get(0), destinationListPoints.get(0));
+        TaskRequestDirections taskRequestDirections = new TaskRequestDirections();
+        taskRequestDirections.execute(url);
+    }
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) { }
+
+    @Override
+    public void onProviderEnabled(String provider) { }
+
+    @Override
+    public void onProviderDisabled(String provider) { }
 
     /**
      * Manipulates the map once available.
@@ -76,46 +120,47 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST);
             return;
         }
-        mMap.setMyLocationEnabled(true);
-        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-            @Override
-            public void onMapLongClick(LatLng latLng) {
-                //Reset marker when already 2
-                if (listPoints.size() == 2) {
-                    listPoints.clear();
-                    mMap.clear();
-                }
-                //Save first point select
-                listPoints.add(latLng);
-                //Create marker
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(latLng);
 
-                if (listPoints.size() == 1) {
-                    //Add first marker to the map
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                } else {
-                    //Add second marker to the map
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                }
-                mMap.addMarker(markerOptions);
-
-                if (listPoints.size() == 2) {
-                    //Create the URL to get request from first marker to second marker
-                    String url = getRequestUrl(listPoints.get(0), listPoints.get(1));
-                    TaskRequestDirections taskRequestDirections = new TaskRequestDirections();
-                    taskRequestDirections.execute(url);
-                }
-            }
-        });
+//        mMap.setMyLocationEnabled(true);
+//        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+//            @Override
+//            public void onMapLongClick(LatLng latLng) {
+//                //Reset marker when already 2
+//                if (listPoints.size() == 2) {
+//                    listPoints.clear();
+//                    mMap.clear();
+//                }
+//                //Save first point select
+//                listPoints.add(latLng);
+//                //Create marker
+//                MarkerOptions markerOptions = new MarkerOptions();
+//                markerOptions.position(latLng);
+//
+//                if (listPoints.size() == 1) {
+//                    //Add first marker to the map
+//                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+//                } else {
+//                    //Add second marker to the map
+//                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+//                }
+//                mMap.addMarker(markerOptions);
+//
+//                if (listPoints.size() == 2) {
+//                    //Create the URL to get request from first marker to second marker
+//                    String url = getRequestUrl(listPoints.get(0), listPoints.get(1));
+//                    TaskRequestDirections taskRequestDirections = new TaskRequestDirections();
+//                    taskRequestDirections.execute(url);
+//                }
+//            }
+//        });
 
     }
 
-    private String getRequestUrl(LatLng origin, LatLng dest) {
+    private String getRequestUrl(LatLng currentLocation, LatLng destinationLocation) {
         //Value of origin
-        String str_org = "origin=" + origin.latitude +","+origin.longitude;
+        String str_org = "origin=" + currentLocation.latitude +","+currentLocation.longitude;
         //Value of destination
-        String str_dest = "destination=" + dest.latitude+","+dest.longitude;
+        String str_dest = "destination=" + destinationLocation.latitude +","+destinationLocation.longitude;
         //Set value enable the sensor
         String sensor = "sensor=true";
         //Mode for find direction
@@ -162,7 +207,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
             httpURLConnection.disconnect();
         }
-        System.out.println(responseString + "zzzzzzzzzzzzzzzzzzzz");
         return responseString;
     }
 
@@ -172,6 +216,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         switch (requestCode){
             case LOCATION_REQUEST:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    turnGPSOn();
                     mMap.setMyLocationEnabled(true);
                 }
                 break;
@@ -231,7 +276,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 for (HashMap<String, String> point : path) {
                     double lat = Double.parseDouble(point.get("lat"));
                     double lon = Double.parseDouble(point.get("lon"));
-                    System.out.println(lat + lon + " aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                     points.add(new LatLng(lat,lon));
                 }
 
@@ -240,13 +284,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 polylineOptions.color(Color.BLUE);
                 polylineOptions.geodesic(true);
             }
-            System.out.println(polylineOptions + " bbbbbbbbbbbbbbbbbbbbbbbbb");
             if (polylineOptions!=null) {
                 mMap.addPolyline(polylineOptions);
             } else {
                 Toast.makeText(getApplicationContext(), "Direction not found!", Toast.LENGTH_SHORT).show();
             }
 
+        }
+    }
+    private void turnGPSOn(){
+        String provider = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+
+        if(!provider.contains("gps")){ //if gps is disabled
+            final Intent poke = new Intent();
+            poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
+            poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
+            poke.setData(Uri.parse("3"));
+            sendBroadcast(poke);
         }
     }
 }

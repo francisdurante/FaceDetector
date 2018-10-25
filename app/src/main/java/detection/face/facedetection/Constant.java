@@ -16,7 +16,8 @@ public class Constant {
     static final String LOGIN_SUCCESS = "Login Success";
     static final String INACTIVE_USER = "User is InActive";
     static final String LOGIN_FAIL = "Login Fail";
-
+    static final String LOADING = "Loading...";
+    static final String SEARCH = "SEARCH";
 
 
     static final String REGISTRATION_URL = "https://darkened-career.000webhostapp.com/api/user_registration";

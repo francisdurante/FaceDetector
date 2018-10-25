@@ -42,10 +42,11 @@
             android:layout_marginTop="17dp"
             android:layout_marginEnd="45dp"
             android:ems="10"
-            android:textColorHint="#FF00"
             android:hint="Username"
             android:inputType="textPersonName"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textColorHint="@color/common_google_signin_btn_text_dark_default"
+            app:backgroundTint="#FFF"/>
 
         <EditText
             android:id="@+id/password_login"
@@ -59,9 +60,10 @@
             android:layout_marginEnd="45dp"
             android:ems="10"
             android:hint="Password"
-            android:textColorHint="#FF00"
             android:inputType="textPassword"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textColorHint="@color/common_google_signin_btn_text_dark_default"
+            app:backgroundTint="#FFF"/>
 
         <Button
             android:id="@+id/login_button"
@@ -73,8 +75,10 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="45dp"
+            android:background = "@drawable/rounded_button"
             android:onClick="login"
-            android:text="login" />
+            android:text="login"
+            android:textColor="#FFF"/>
 
         <TextView
             android:id="@+id/notregister"
@@ -83,12 +87,13 @@
             android:layout_below="@+id/login_button"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="54dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="43dp"
+            android:gravity="center"
             android:onClick="registration"
-            android:text="Not Registered? Click Here"
-            android:textColor="@color/colorAccent" />
+            android:text="Not Registered?\nClick Here!"
+            android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
     </RelativeLayout>
 </RelativeLayout>

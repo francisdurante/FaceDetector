@@ -10,8 +10,10 @@ public class Constant {
     static final String ATLEAST_SIX_CHARACTERS = "Password must be Greater Than Or Equal to 6 Characters";
     static final String MISMATCH_PASSWORD = "Password And Retype Password Not Match";
     static final String PLEASE_WAIT = "Please Wait...";
+    static final String AGE_REQUIRED = "Age Field is Required";
+    static final String PREFERRED_FOOD_REQUIRED = "Preferred Food Field is Required";
     static final String EXISTING = "User Already Exist";
-    static final String CONNECT_UNSUCCESSFUL = "Please Check Your Connecetion";
+    static final String CONNECT_UNSUCCESSFUL = "Please Check Your Connection";
     static final String REGISTRATION_SUCCESS = "Registration Success";
     static final String LOGIN_SUCCESS = "Login Success";
     static final String INACTIVE_USER = "User is InActive";

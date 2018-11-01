@@ -22,14 +22,16 @@ public class ApiClass extends AsyncTask<Context,Void,String> {
     public String registrationKey = "user_registration";
     public int requestCode = 0;
 
-    public ApiClass(String url,String firstName, String lastName, String username, String email,String password,int requestCode) {
+    public ApiClass(String url,String firstName, String lastName, String username, String email,String password,String age,String pFood,int requestCode) {
         this.url = url +
                 "?username=" + username +
                 "&email=" + email +
                 "&pass=" + registrationKey +
                 "&first_name=" + firstName +
                 "&last_name=" + lastName +
-                "&password=" + password;
+                "&password=" + password +
+                "&preferred_food=" + pFood +
+                "&age=" + age;
         this.requestCode = requestCode;
     }
 

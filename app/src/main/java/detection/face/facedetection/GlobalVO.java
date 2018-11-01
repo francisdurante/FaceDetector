@@ -7,6 +7,7 @@ public class GlobalVO {
     static String accounId;
     static String latidtude;
     static String longitude;
+    static String preferredFood;
 
     static String getRegistrationResponse() {
         return registrationResponse;
@@ -54,5 +55,13 @@ public class GlobalVO {
 
     public static void setLongitude(String longitude) {
         GlobalVO.longitude = longitude;
+    }
+
+    public static String getPreferredFood() {
+        return preferredFood;
+    }
+
+    public static void setPreferredFood(String preferredFood) {
+        GlobalVO.preferredFood = preferredFood;
     }
 }

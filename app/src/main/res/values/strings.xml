@@ -5,4 +5,8 @@
     <string name="search_button">Search</string>
     <string name="search_text">Search…</string>
     <string name="product_list_label">PRODUCT LIST</string>
+    <string-array name="filter">
+        <item>Establishment</item>
+        <item>Food</item>
+    </string-array>
 </resources>

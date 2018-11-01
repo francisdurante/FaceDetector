@@ -6,10 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -27,6 +30,7 @@ public class EstablishmentListActivity extends AppCompatActivity {
     LinearLayout scrollView;
     TextView searchKey;
     Button searchButton;
+    Spinner mSpinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,17 +38,25 @@ public class EstablishmentListActivity extends AppCompatActivity {
         getWindow().setBackgroundDrawableResource(R.drawable.background_image);
         searchKey = findViewById(R.id.search_box);
         searchButton = findViewById(R.id.search_est_button);
+        mSpinner = findViewById(R.id.filter);
         searchButton.setText(Constant.SEARCH);
-        getEstRegistered("","");
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.filter));
+        mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinner.setAdapter(mAdapter);
+        mSpinner.setOnItemSelectedListener(listener);
+        getEstRegistered("","",GlobalVO.getPreferredFood());
     }
 
-    public void getEstRegistered(String est_key,String category_key) {
+    public void getEstRegistered(String est_key,String category_key,String food) {
         RequestParams rp = new RequestParams();
         rp.add("pass", "get_all_est_user");
         if(!"".equals(est_key)){
             rp.add("key", est_key);
         }if(!"".equals(category_key)){
             rp.add("filter",category_key);
+        }if(!"".equals(food)){
+            rp.add("food",food);
         }
         searchButton.setText(Constant.LOADING);
         searchButton.setEnabled(false);
@@ -59,24 +71,23 @@ public class EstablishmentListActivity extends AppCompatActivity {
                     if ("success".equals(status)) {
                         JSONArray data = new JSONArray(object.getString("data"));
                         lenght = data.length();
-                        System.out.println(lenght + " aaaaaaaaa");
                         for (int x = 0; x < lenght; x++) {
                             String array = data.getString(x);
                             JSONObject datas = new JSONObject(array);
                             int estStatus = datas.getInt("est_status");
                             if (estStatus == 1) {
-                                View view = inflater.inflate(R.layout.est_list_item,scrollView,false);
+                                View view = inflater.inflate(R.layout.est_list_item, scrollView, false);
                                 ImageView imageView = view.findViewById(R.id.est_pic);
-                                imageView.setPadding(20,10,10,20);
+                                imageView.setPadding(20, 10, 10, 20);
                                 Picasso.with(getApplicationContext())
                                         .load(picUrl(datas.getString("est_front_store")))
                                         .into(imageView);
-                                imageView.setOnClickListener(new ClickEstablishment(datas.getString("establishment_name"),datas.getString("establishment_user_id")));
+                                imageView.setOnClickListener(new ClickEstablishment(datas.getString("establishment_name"), datas.getString("establishment_user_id")));
 
                                 TextView estName = view.findViewById(R.id.est_name);
                                 estName.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
                                 estName.setText(datas.getString("establishment_name"));
-                                estName.setOnClickListener(new ClickEstablishment(datas.getString("establishment_name"),datas.getString("establishment_user_id")));
+                                estName.setOnClickListener(new ClickEstablishment(datas.getString("establishment_name"), datas.getString("establishment_user_id")));
 
                                 TextView estAddress = view.findViewById(R.id.est_address);
                                 estAddress.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
@@ -92,6 +103,9 @@ public class EstablishmentListActivity extends AppCompatActivity {
                             searchButton.setText(Constant.SEARCH);
                             searchButton.setEnabled(true);
                         }
+                    }else{
+                        searchButton.setText(Constant.SEARCH);
+                        searchButton.setEnabled(true);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -129,6 +143,21 @@ public class EstablishmentListActivity extends AppCompatActivity {
 
     public void searchButton(View v){
         scrollView.removeAllViews();
-        getEstRegistered(searchKey.getText().toString(),"");
+        if(mSpinner.getSelectedItem().toString().equals("Establishment")) {
+            getEstRegistered(searchKey.getText().toString(), "", "");
+        }else if(mSpinner.getSelectedItem().toString().equals("Food")){
+            getEstRegistered("", "", searchKey.getText().toString());
+        }
     }
+    private AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            ((TextView) parent.getChildAt(0)).setTextColor(0xFFFFFFFF);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
 }

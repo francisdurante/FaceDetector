@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                             GlobalVO.setFirstName(datas.getString("first_name"));
                             GlobalVO.setLastname(datas.getString("last_name"));
                             GlobalVO.setAccounId(datas.getString("id"));
+                            GlobalVO.setPreferredFood(datas.getString("preferred_food"));
                             save("first_name",GlobalVO.getFirstName());
                             save("last_name",GlobalVO.getLastname());
                             save("account_id",GlobalVO.getAccounId());

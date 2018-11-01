@@ -17,6 +17,8 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText username = null;
     EditText password = null;
     EditText reTypePassword = null;
+    EditText age = null;
+    EditText preferredFood = null;
     Context mContext = this;
     CountDownTimer cTimer = null;
     @Override
@@ -29,6 +31,8 @@ public class RegistrationActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         reTypePassword = findViewById(R.id.repassword);
+        age = findViewById(R.id.age);
+        preferredFood = findViewById(R.id.preferred_food);
     }
 
     public void register(View v){
@@ -44,6 +48,10 @@ public class RegistrationActivity extends AppCompatActivity {
             Toast.makeText(mContext,Constant.ATLEAST_SIX_CHARACTERS,Toast.LENGTH_LONG).show();
         }else if(!password.getText().toString().equals(reTypePassword.getText().toString())){
             Toast.makeText(mContext,Constant.MISMATCH_PASSWORD,Toast.LENGTH_LONG).show();
+        }else if(age.getText().toString().equals("")){
+            Toast.makeText(mContext,Constant.AGE_REQUIRED,Toast.LENGTH_LONG).show();
+        }else if(preferredFood.getText().toString().equals("")){
+            Toast.makeText(mContext,Constant.PREFERRED_FOOD_REQUIRED,Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(mContext,Constant.PLEASE_WAIT,Toast.LENGTH_LONG).show();
             new ApiClass(Constant.REGISTRATION_URL,
@@ -52,6 +60,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     username.getText().toString(),
                     email.getText().toString(),
                     password.getText().toString(),
+                    age.getText().toString(),
+                    preferredFood.getText().toString(),
                     Constant.REGISTRATION).execute();
 
             cTimer = new CountDownTimer(7000, 1000) {

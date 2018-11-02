@@ -27,13 +27,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        if(!"".equals(getString("account_id")) &&
-                !"".equals(getString("first_name")) &&
-                !"".equals(getString("last_name"))){
-            Intent redirect = new Intent(getApplicationContext(),MainActivity.class);
-            startActivity(redirect);
-            finish();
-        }
+//        if(!"".equals(getString("account_id")) &&
+//                !"".equals(getString("first_name")) &&
+//                !"".equals(getString("last_name"))){
+//            Intent redirect = new Intent(getApplicationContext(),MainActivity.class);
+//            startActivity(redirect);
+//            finish();
+//        }
         un = findViewById(R.id.username_login);
         pass = findViewById(R.id.password_login);
     }

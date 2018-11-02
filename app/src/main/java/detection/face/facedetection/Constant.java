@@ -20,6 +20,8 @@ public class Constant {
     static final String LOGIN_FAIL = "Login Fail";
     static final String LOADING = "Loading...";
     static final String SEARCH = "SEARCH";
+    static final int CAMERA_REQUEST = 1888;
+    static final int MY_CAMERA_PERMISSION_CODE = 100;
 
 
     static final String REGISTRATION_URL = "https://darkened-career.000webhostapp.com/api/user_registration";

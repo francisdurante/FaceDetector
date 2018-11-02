@@ -68,7 +68,22 @@
             android:layout_below="@+id/search_box"
             android:layout_marginStart="4dp"
             android:layout_marginTop="-7dp"
-            android:layout_toEndOf="@+id/filter_label" />
+            android:layout_toEndOf="@+id/filter_label"/>
+
+        <Button
+            android:id="@+id/search_face"
+            android:layout_width="353dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/filter_label"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="31dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/rounded_button"
+            android:text="@string/search_face_button"
+            android:onClick="detectFace"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -78,7 +93,7 @@
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/filter">
+            android:layout_below="@+id/search_face">
 
             <LinearLayout
                 android:id="@+id/list"

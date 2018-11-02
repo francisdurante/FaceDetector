@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,13 +34,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 public class MainActivity extends Activity {
-    private static final int CAMERA_REQUEST = 1888;
     private ImageView imageView;
-    private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private final String apiEndpoint = "https://eastasia.api.cognitive.microsoft.com/face/v1.0";
     private final String subscriptionKey = "c2cc340846644adca60988b9218a79f9";
     private final FaceServiceClient faceServiceClient =
             new FaceServiceRestClient(apiEndpoint, subscriptionKey);
+    ProgressDialog detectionProgressDialog;
     TextView loggedIn;
     static TextView age;
     static TextView gender;
@@ -53,49 +53,62 @@ public class MainActivity extends Activity {
         age = findViewById(R.id.age);
         gender = findViewById(R.id.gender);
         smile = findViewById(R.id.smile);
-        loggedIn = findViewById(R.id.logged_in);
-        String logged_in = "Logged In : " + getString("first_name") + " " + getString("last_name");
-        loggedIn.setText(logged_in);
-        this.imageView = (ImageView) this.findViewById(R.id.imageView1);
-        Button photoButton = (Button) this.findViewById(R.id.button1);
-        Button map = (Button) this.findViewById(R.id.button2);
-        photoButton.setOnClickListener(new View.OnClickListener() {
-
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View v) {
-                if (checkSelfPermission(Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA},
-                            MY_CAMERA_PERMISSION_CODE);
-                } else {
-                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
-                }
+        //loggedIn = findViewById(R.id.logged_in);
+        //String logged_in = "Logged In : " + getString("first_name") + " " + getString("last_name");
+        //loggedIn.setText(logged_in);
+        this.imageView = (ImageView) this.findViewById(R.id.image_result);
+        detectionProgressDialog = new ProgressDialog(this);
+        if (checkSelfPermission(Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA},
+                    Constant.MY_CAMERA_PERMISSION_CODE);
+        } else {
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, Constant.CAMERA_REQUEST);
+        }
 //                Intent map = new Intent(mContext,MapsActivity.class);
 //                startActivity(map);
-            }
-        });
-        map.setOnClickListener(new View.OnClickListener() {
 
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View v) {
-                Intent map = new Intent(mContext,MapsActivity.class);
-                startActivity(map);
-            }
-        });
+//        Button photoButton = (Button) this.findViewById(R.id.button1);
+//        Button map = (Button) this.findViewById(R.id.button2);
+
+//        photoButton.setOnClickListener(new View.OnClickListener() {
+//
+//            @RequiresApi(api = Build.VERSION_CODES.M)
+//            @Override
+//            public void onClick(View v) {
+//                if (checkSelfPermission(Manifest.permission.CAMERA)
+//                        != PackageManager.PERMISSION_GRANTED) {
+//                    requestPermissions(new String[]{Manifest.permission.CAMERA},
+//                            Constant.MY_CAMERA_PERMISSION_CODE);
+//                } else {
+//                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+//                    startActivityForResult(cameraIntent, Constant.CAMERA_REQUEST);
+//                }
+////                Intent map = new Intent(mContext,MapsActivity.class);
+////                startActivity(map);
+//            }
+//        });
+//        map.setOnClickListener(new View.OnClickListener() {
+//
+//            @RequiresApi(api = Build.VERSION_CODES.M)
+//            @Override
+//            public void onClick(View v) {
+//                Intent map = new Intent(mContext,MapsActivity.class);
+//                startActivity(map);
+//            }
+//        });
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == MY_CAMERA_PERMISSION_CODE) {
+        if (requestCode == Constant.MY_CAMERA_PERMISSION_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
                 Intent cameraIntent = new
                         Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                startActivityForResult(cameraIntent, Constant.CAMERA_REQUEST);
             } else {
                 Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
             }
@@ -104,7 +117,7 @@ public class MainActivity extends Activity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+        if (requestCode == Constant.CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(photo);
             detectAndFrame(photo);
@@ -122,7 +135,6 @@ public class MainActivity extends Activity {
         @SuppressLint("StaticFieldLeak") AsyncTask<InputStream, String, Face[]> detectTask =
                 new AsyncTask<InputStream, String, Face[]>() {
                     String exceptionMessage = "";
-
                     @Override
                     protected Face[] doInBackground(InputStream... params) {
                         try {
@@ -157,20 +169,20 @@ public class MainActivity extends Activity {
 
                     @Override
                     protected void onPreExecute() {
-
+                        detectionProgressDialog.show();
                     }
                     @Override
                     protected void onProgressUpdate(String... progress) {
-                        //detectionProgressDialog.setMessage(progress[0]);
+                        detectionProgressDialog.setMessage(progress[0]);
                     }
                     @Override
                     protected void onPostExecute(Face[] result) {
-                        //detectionProgressDialog.dismiss();
+                        detectionProgressDialog.dismiss();
                         if(!exceptionMessage.equals("")){
                             showError(exceptionMessage);
                         }
                         if (result == null) return;
-                        ImageView imageView = findViewById(R.id.imageView1);
+                        ImageView imageView = findViewById(R.id.image_result);
                         imageView.setImageBitmap(
                                 drawFaceRectanglesOnBitmap(imageBitmap, result));
                         imageBitmap.recycle();
@@ -208,8 +220,9 @@ public class MainActivity extends Activity {
                         faceRectangle.left + faceRectangle.width,
                         faceRectangle.top + faceRectangle.height,
                         paint);
+                System.out.println();
                 gender.setText("GENDER: " + face.faceAttributes.gender);
-                age.setText("AGE: " + face.faceAttributes.age);
+                age.setText("AGE: " + getAgeRange(face.faceAttributes.age));
                 Double[] emotion = {face.faceAttributes.emotion.contempt,
                         face.faceAttributes.emotion.anger,
                         face.faceAttributes.emotion.disgust,
@@ -275,4 +288,30 @@ public class MainActivity extends Activity {
         }
         return emotion;
     }
+
+    public void reCapture(View v){
+        if (checkSelfPermission(Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA},
+                    Constant.MY_CAMERA_PERMISSION_CODE);
+        } else {
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, Constant.CAMERA_REQUEST);
+        }
+    }
+
+    public static String getAgeRange(double age) {
+        double resultAge = age;
+        String ageRange = "Children";
+        if (resultAge < 25) {
+            ageRange = "Youth";
+        }
+        if (resultAge < 59) {
+            ageRange = "Adult";
+        } else if (resultAge > 59) {
+            ageRange = "Senior";
+        }
+        return ageRange;
+    }
+
 }

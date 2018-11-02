@@ -1,48 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-    <Button android:id="@+id/button1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Captured"/>
-    <Button android:id="@+id/button2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MAP"/>
+    android:layout_height="fill_parent">
+
     <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="136dp"
-        android:layout_height="193dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/background_image" />
+
+    <!--<Button android:id="@+id/button1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Captured"/>-->
+    <!--<Button android:id="@+id/button2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MAP"/>-->
+    <ImageView
+        android:id="@+id/logo_main"
+        android:layout_width="151dp"
+        android:layout_height="109dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="118dp"
+        android:background="@drawable/eateryfinderlogo" />
+
+    <ImageView
+        android:id="@+id/image_result"
+        android:layout_width="243dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/logo_main"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp" />
 
     <TextView
         android:id="@+id/gender"
         android:layout_width="172dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/image_result"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="106dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="106dp"
         android:text="" />
 
     <TextView
         android:id="@+id/age"
         android:layout_width="172dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/gender"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="106dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="106dp"
         android:text="" />
+
     <TextView
         android:id="@+id/smile"
         android:layout_width="172dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/age"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="106dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="106dp"
         android:text="" />
-    <TextView
-        android:id="@+id/created"
-        android:layout_width="172dp"
-        android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/logged_in"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <!--<TextView-->
+        <!--android:id="@+id/created"-->
+        <!--android:layout_width="172dp"-->
+        <!--android:layout_height="wrap_content"/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/logged_in"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
 
     <Button
-        android:id="@+id/logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="logout"
-        android:text="Logout" />
+        android:id="@+id/re_capture"
+        android:layout_width="104dp"
+        android:layout_height="28dp"
+        android:layout_below="@id/smile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/rounded_button"
+        android:text="@string/re_capture"
+        android:onClick="reCapture"/>
+
+    <Button
+        android:id="@+id/search_main"
+        android:layout_width="104dp"
+        android:layout_height="28dp"
+        android:layout_below="@id/re_capture"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/rounded_button"
+        android:text="@string/search_main" />
+
+
+    <!--<Button-->
+        <!--android:id="@+id/logout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:onClick="logout"-->
+        <!--android:text="Logout" />-->
     <!--android:text="CREATED BY FRANCIS DURANTE - POWERED BY MICROSOFT API" />-->
 
-</LinearLayout>
+</RelativeLayout>

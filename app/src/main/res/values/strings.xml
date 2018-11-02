@@ -9,4 +9,7 @@
         <item>Establishment</item>
         <item>Food</item>
     </string-array>
+    <string name="search_face_button">Use Face Recognition</string>
+    <string name="re_capture">Re Capture</string>
+    <string name="search_main">Search</string>
 </resources>

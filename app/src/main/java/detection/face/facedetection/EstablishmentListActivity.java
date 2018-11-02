@@ -149,6 +149,9 @@ public class EstablishmentListActivity extends AppCompatActivity {
             getEstRegistered("", "", searchKey.getText().toString());
         }
     }
+    public void detectFace(View v){
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+    }
     private AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

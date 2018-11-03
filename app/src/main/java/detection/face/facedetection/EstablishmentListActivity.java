@@ -70,6 +70,8 @@ public class EstablishmentListActivity extends AppCompatActivity {
                     String status = object.getString("status");
                     if ("success".equals(status)) {
                         JSONArray data = new JSONArray(object.getString("data"));
+                        JSONObject rate = new JSONObject(object.getString("rate"));
+                        JSONObject rate_count = new JSONObject(object.getString("rate_count"));
                         lenght = data.length();
                         for (int x = 0; x < lenght; x++) {
                             String array = data.getString(x);
@@ -96,7 +98,13 @@ public class EstablishmentListActivity extends AppCompatActivity {
                                 RatingBar ratingBar = view.findViewById(R.id.rating_bar);
                                 ratingBar.setIsIndicator(true);
                                 ratingBar.setNumStars(5);
-                                ratingBar.setRating(3);
+                                ratingBar.setStepSize(0.1f);
+                                ratingBar.setRating(Float.parseFloat(rate.getString(datas.getString("est_id"))));
+
+                                TextView rateTotalAndCount = view.findViewById(R.id.rate_total_and_count);
+                                rateTotalAndCount.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
+                                rateTotalAndCount.setText("Total Rate : " + Float.parseFloat(rate.getString(datas.getString("est_id"))) +
+                                        " By: " + (Integer.parseInt(rate_count.getString(datas.getString("est_id"))) <= 1 ? Integer.parseInt(rate_count.getString(datas.getString("est_id"))) + " User" : Integer.parseInt(rate_count.getString(datas.getString("est_id"))) +" Users" ));
 
                                 scrollView.addView(view);
                             }

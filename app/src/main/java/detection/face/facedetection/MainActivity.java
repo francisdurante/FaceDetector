@@ -35,10 +35,8 @@ import java.io.InputStream;
 
 public class MainActivity extends Activity {
     private ImageView imageView;
-    private final String apiEndpoint = "https://eastasia.api.cognitive.microsoft.com/face/v1.0";
-    private final String subscriptionKey = "c2cc340846644adca60988b9218a79f9";
     private final FaceServiceClient faceServiceClient =
-            new FaceServiceRestClient(apiEndpoint, subscriptionKey);
+            new FaceServiceRestClient(Constant.API_ENDPOINT, Constant.SUBSCRRIPTION_KEY);
     ProgressDialog detectionProgressDialog;
     TextView loggedIn;
     static TextView age;

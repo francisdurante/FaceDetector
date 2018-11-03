@@ -42,5 +42,12 @@
             android:numStars="5"
             android:rating="3"
             android:stepSize="1" />
+        <TextView
+            android:id="@+id/rate_total_and_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#FFF"
+            android:textSize="15sp" />
     </LinearLayout>
 </LinearLayout>

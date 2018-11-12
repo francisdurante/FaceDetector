@@ -68,7 +68,6 @@ public class ApiClass extends AsyncTask<Context,Void,String> {
         switch(requestCode){
             case Constant.REGISTRATION:
                 GlobalVO.setRegistrationResponse(result);
-                System.out.println(GlobalVO.getRegistrationResponse() + " ssssssssssssssss");
                 break;
         }
     }

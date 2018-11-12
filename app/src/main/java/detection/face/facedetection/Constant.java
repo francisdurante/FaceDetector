@@ -24,6 +24,8 @@ public class Constant {
     static final int MY_CAMERA_PERMISSION_CODE = 100;
     static final String API_ENDPOINT = "https://eastasia.api.cognitive.microsoft.com/face/v1.0";
     static final String SUBSCRRIPTION_KEY = "fc2cc340846644adcaq60988b9218a79f9d";
+    static final String LOGGING_IN = "Logging In...";
+    static final String LOG_IN = "Login";
 
     static final String REGISTRATION_URL = "https://darkened-career.000webhostapp.com/api/user_registration";
     static final String LOGIN_URL = "https://darkened-career.000webhostapp.com/api/login";

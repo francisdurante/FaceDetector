@@ -42,7 +42,6 @@ public class EstablishmentDetailsActivity extends AppCompatActivity {
     }
 
     public void getProduct() {
-        System.out.println(id + " aaaaa");
         RequestParams rp = new RequestParams();
         rp.add("pass", "get_product");
         rp.add("for_process", "all_active");
@@ -114,7 +113,6 @@ public class EstablishmentDetailsActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 // If the response is JSONObject instead of expected JSONArray
                 try {
-                    System.out.println(response + " aaaaaaaaaaaaaaaaaaaaaa");
                     JSONArray data = new JSONArray(response.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -124,7 +122,6 @@ public class EstablishmentDetailsActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    System.out.println(response + " aaaaaaaaaaaaaaaaaaaaaa");
                     JSONObject object = new JSONObject(response.toString());
                     String status = object.getString("status");
                     if ("success".equals(status)) {
@@ -136,7 +133,6 @@ public class EstablishmentDetailsActivity extends AppCompatActivity {
                         if (estStatus == 1) {
                             lon = datas.getString("location_longitude");
                             lat = datas.getString("location_latitude");
-                            System.out.println(lat+ " aaaaaa " + lon);
                         }
                     }
                 } catch (JSONException e) {
@@ -155,7 +151,6 @@ public class EstablishmentDetailsActivity extends AppCompatActivity {
         Bundle b = new Bundle();
         b.putString("lat",lat);
         b.putString("lon",lon);
-        System.out.println(lat+ " aaaaaa " + lon);
         Intent map = new Intent(getApplicationContext(),MapsActivity.class);
         map.putExtras(b);
         startActivity(map);

@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText un = null;
     EditText pass = null;
     SharedPreferences spf;
+    Button loginButton = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +38,12 @@ public class LoginActivity extends AppCompatActivity {
 //        }
         un = findViewById(R.id.username_login);
         pass = findViewById(R.id.password_login);
+        loginButton = findViewById(R.id.login_button);
     }
 
     public void login(View v) {
+        loginButton.setEnabled(false);
+        loginButton.setText(Constant.LOGGING_IN);
         RequestParams rp = new RequestParams();
         rp.add("username", un.getText().toString());
         rp.add("password", pass.getText().toString());
@@ -79,12 +84,18 @@ public class LoginActivity extends AppCompatActivity {
                             finish();
                             Toast.makeText(getApplicationContext(),Constant.LOGIN_SUCCESS,Toast.LENGTH_SHORT).show();
                         }else{
+                            loginButton.setEnabled(true);
+                            loginButton.setText(Constant.LOG_IN);
                             Toast.makeText(getApplicationContext(),Constant.INACTIVE_USER,Toast.LENGTH_SHORT).show();
                         }
                     }else{
+                        loginButton.setEnabled(true);
+                        loginButton.setText(Constant.LOG_IN);
                         Toast.makeText(getApplicationContext(),Constant.LOGIN_FAIL,Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
+                    loginButton.setEnabled(true);
+                    loginButton.setText(Constant.LOG_IN);
                     e.printStackTrace();
                 }
             }

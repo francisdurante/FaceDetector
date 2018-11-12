@@ -45,7 +45,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,LocationListener {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
     private GoogleMap mMap;
     private LocationManager locationManager;
     private static final long MIN_TIME = 400;
@@ -54,6 +54,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     ArrayList<LatLng> currentListPoints;
     ArrayList<LatLng> destinationListPoints;
     ArrayList<LatLng> listPoints;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +63,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST);
             return;
         }
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -72,6 +72,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         currentListPoints = new ArrayList<>();
         destinationListPoints = new ArrayList<>();
     }
+
     @Override
     public void onLocationChanged(Location location) {
         MarkerOptions markerOptions = new MarkerOptions();
@@ -94,14 +95,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         TaskRequestDirections taskRequestDirections = new TaskRequestDirections();
         taskRequestDirections.execute(url);
     }
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) { }
 
     @Override
-    public void onProviderEnabled(String provider) { }
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
 
     @Override
-    public void onProviderDisabled(String provider) { }
+    public void onProviderEnabled(String provider) {
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+    }
 
     /**
      * Manipulates the map once available.
@@ -120,40 +125,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST);
             return;
         }
-
-//        mMap.setMyLocationEnabled(true);
-//        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-//            @Override
-//            public void onMapLongClick(LatLng latLng) {
-//                //Reset marker when already 2
-//                if (listPoints.size() == 2) {
-//                    listPoints.clear();
-//                    mMap.clear();
-//                }
-//                //Save first point select
-//                listPoints.add(latLng);
-//                //Create marker
-//                MarkerOptions markerOptions = new MarkerOptions();
-//                markerOptions.position(latLng);
-//
-//                if (listPoints.size() == 1) {
-//                    //Add first marker to the map
-//                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-//                } else {
-//                    //Add second marker to the map
-//                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-//                }
-//                mMap.addMarker(markerOptions);
-//
-//                if (listPoints.size() == 2) {
-//                    //Create the URL to get request from first marker to second marker
-//                    String url = getRequestUrl(listPoints.get(0), listPoints.get(1));
-//                    TaskRequestDirections taskRequestDirections = new TaskRequestDirections();
-//                    taskRequestDirections.execute(url);
-//                }
-//            }
-//        });
-
+        mMap.setMyLocationEnabled(true);
     }
 
     private String getRequestUrl(LatLng currentLocation, LatLng destinationLocation) {
@@ -217,7 +189,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             case LOCATION_REQUEST:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     turnGPSOn();
-                    mMap.setMyLocationEnabled(true);
+                    Bundle b = getIntent().getExtras();
+                    b.putString("lat",b.getString("lat"));
+                    b.putString("lon",b.getString("lon"));
+                    Intent map = new Intent(getApplicationContext(),MapsActivity.class);
+                    map.putExtras(b);
+                    startActivity(map);
+                    finish();
                 }
                 break;
         }

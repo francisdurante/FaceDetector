@@ -23,13 +23,14 @@ public class Constant {
     static final int CAMERA_REQUEST = 1888;
     static final int MY_CAMERA_PERMISSION_CODE = 100;
     static final String API_ENDPOINT = "https://eastasia.api.cognitive.microsoft.com/face/v1.0";
-    static final String SUBSCRRIPTION_KEY = "fc2cc340846644adcaq60988b9218a79f9d";
+    static final String SUBSCRRIPTION_KEY = "c2cc340846644adca60988b9218a79f9";
     static final String LOGGING_IN = "Logging In...";
     static final String LOG_IN = "Login";
 
     static final String REGISTRATION_URL = "https://darkened-career.000webhostapp.com/api/user_registration";
     static final String LOGIN_URL = "https://darkened-career.000webhostapp.com/api/login";
     static final String GET_REGISTERED_EST = "https://darkened-career.000webhostapp.com/api/get_all_est_user";
+    static final String GET_FACE_SUGGESTION = "https://darkened-career.000webhostapp.com/api/face_suggestion";
     static final String PUBLIC_IMAGE_PATH = "https://darkened-career.000webhostapp.com/images/";
     static final String GET_PRODUCT_BY_ESTABLISHMENT = "https://darkened-career.000webhostapp.com/api/get_est_product";
 

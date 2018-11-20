@@ -1,16 +1,21 @@
 package detection.face.facedetection;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,6 +36,47 @@ public class EstablishmentListActivity extends AppCompatActivity {
     TextView searchKey;
     Button searchButton;
     Spinner mSpinner;
+    SharedPreferences spf;
+    PopupMenu popupMenu;
+
+    public void showPopup(View v) {
+        popupMenu = new PopupMenu(this, v);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.menu_main, popupMenu.getMenu());
+        popupMenu.show();
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_logout:
+                        save("account_id","");
+                        save("first_name","");
+                        save("last_name","");
+                        startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                        break;
+                }
+                return false;
+            }
+        });
+
+    }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.action_logout:
+//                save("account_id","");
+//                save("first_name","");
+//                save("last_name","");
+//                startActivity(new Intent(this,LoginActivity.class));
+//                break;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//
+//        return true;
+//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -171,4 +217,12 @@ public class EstablishmentListActivity extends AppCompatActivity {
 
         }
     };
+    public void save(String key, String value) {
+
+        spf = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor edit = spf.edit();
+        edit.putString(key, value);
+        edit.apply();
+
+    }
 }

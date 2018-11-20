@@ -46,7 +46,8 @@
         android:layout_marginStart="106dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="106dp"
-        android:text="" />
+        android:text=""
+        android:textColor="#FFF" />
 
     <TextView
         android:id="@+id/age"
@@ -58,7 +59,8 @@
         android:layout_marginStart="106dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="106dp"
-        android:text="" />
+        android:text=""
+        android:textColor="#FFF" />
 
     <TextView
         android:id="@+id/smile"
@@ -70,7 +72,7 @@
         android:layout_marginStart="106dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="106dp"
-        android:text="" />
+        android:textColor="#FFF" />
 
     <!--<TextView-->
         <!--android:id="@+id/created"-->
@@ -84,24 +86,25 @@
 
     <Button
         android:id="@+id/re_capture"
-        android:layout_width="104dp"
-        android:layout_height="28dp"
+        android:layout_width="228dp"
+        android:layout_height="31dp"
         android:layout_below="@id/smile"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:background="@drawable/rounded_button"
-        android:text="@string/re_capture"
-        android:onClick="reCapture"/>
+        android:onClick="reCapture"
+        android:text="@string/re_capture" />
 
     <Button
         android:id="@+id/search_main"
-        android:layout_width="104dp"
-        android:layout_height="28dp"
+        android:layout_width="226dp"
+        android:layout_height="30dp"
         android:layout_below="@id/re_capture"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="7dp"
         android:background="@drawable/rounded_button"
-        android:text="@string/search_main" />
+        android:text="@string/search_main"
+        android:onClick="searchOnclick"/>
 
 
     <!--<Button-->

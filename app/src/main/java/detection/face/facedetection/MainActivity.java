@@ -44,6 +44,9 @@ public class MainActivity extends Activity {
     static TextView smile;
     Context mContext = this;
     SharedPreferences spf;
+    static String emotion_result = "";
+    static String age_result = "";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -218,7 +221,7 @@ public class MainActivity extends Activity {
                         faceRectangle.left + faceRectangle.width,
                         faceRectangle.top + faceRectangle.height,
                         paint);
-                System.out.println();
+
                 gender.setText("GENDER: " + face.faceAttributes.gender);
                 age.setText("AGE: " + getAgeRange(face.faceAttributes.age));
                 Double[] emotion = {face.faceAttributes.emotion.contempt,
@@ -230,11 +233,9 @@ public class MainActivity extends Activity {
                         face.faceAttributes.emotion.sadness,
                         face.faceAttributes.emotion.surprise};
                 smile.setText(getEmotion(emotion));
-//                if(face.faceAttributes.smile > 0.4){
-//                    smile.setText("SMILING");
-//                }else{
-//                    smile.setText("SAD");
-//                }
+                emotion_result = getEmotion(emotion);
+                System.out.println(emotion_result + " aaaaaaaaaaaaa");
+                age_result = getAgeRange(face.faceAttributes.age);
             }
         }
         return bitmap;
@@ -312,4 +313,15 @@ public class MainActivity extends Activity {
         return ageRange;
     }
 
+    public void searchOnclick(View v){
+        String emotion = emotion_result;
+        String age = age_result;
+        Intent mIntent = new Intent(mContext, FaceSuggestionActivity.class);
+        Bundle mBundle = new Bundle();
+        mBundle.putString("emotion", emotion);
+        mBundle.putString("age", age);
+        mIntent.putExtras(mBundle);
+        startActivity(mIntent);
+
+    }
 }

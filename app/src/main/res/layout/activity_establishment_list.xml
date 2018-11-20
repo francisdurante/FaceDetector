@@ -24,6 +24,18 @@
         android:layout_marginTop="0dp">
 
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="0dp"
+            android:layout_toEndOf="@+id/search_est_button"
+            android:src="@drawable/iconfinder_profle_1055000"
+            android:onClick="showPopup"/>
+
         <EditText
             android:id="@+id/search_box"
             android:layout_width="wrap_content"
@@ -32,21 +44,21 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="30dp"
             android:layout_marginTop="14dp"
+            android:backgroundTint="#FFF"
             android:ems="10"
             android:hint="@string/search_text"
             android:inputType="textPersonName"
             android:textColor="#FFF"
-            android:textColorHint="#FFF"
-            android:backgroundTint="#FFF"/>
+            android:textColorHint="#FFF" />
 
         <Button
             android:id="@+id/search_est_button"
-            android:layout_width="105dp"
+            android:layout_width="88dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="11dp"
-            android:layout_marginEnd="18dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
+            android:layout_toEndOf="@+id/search_box"
             android:onClick="searchButton" />
 
         <TextView
@@ -68,7 +80,7 @@
             android:layout_below="@+id/search_box"
             android:layout_marginStart="4dp"
             android:layout_marginTop="-7dp"
-            android:layout_toEndOf="@+id/filter_label"/>
+            android:layout_toEndOf="@+id/filter_label" />
 
         <Button
             android:id="@+id/search_face"
@@ -82,12 +94,12 @@
             android:layout_marginEnd="31dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/rounded_button"
-            android:text="@string/search_face_button"
-            android:onClick="detectFace"/>
+            android:onClick="detectFace"
+            android:text="@string/search_face_button" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></RelativeLayout>
+            android:layout_height="wrap_content" />
 
         <ScrollView
             android:id="@+id/scroll_view"

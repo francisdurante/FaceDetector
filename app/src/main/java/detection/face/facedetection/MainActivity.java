@@ -232,9 +232,8 @@ public class MainActivity extends Activity {
                         face.faceAttributes.emotion.neutral,
                         face.faceAttributes.emotion.sadness,
                         face.faceAttributes.emotion.surprise};
-                smile.setText(getEmotion(emotion));
+                smile.setText("EMOTION : " + getEmotion(emotion));
                 emotion_result = getEmotion(emotion);
-                System.out.println(emotion_result + " aaaaaaaaaaaaa");
                 age_result = getAgeRange(face.faceAttributes.age);
             }
         }
@@ -269,21 +268,21 @@ public class MainActivity extends Activity {
             if(emotions[x] > emotions[largest]) largest = x;
         }
         if(largest == 0){
-            emotion = "Contempt";
+            emotion = "CONTEMPT";
         }else if(largest == 1){
-            emotion = "Anger";
+            emotion = "ANGER";
         }else if(largest == 2){
-            emotion = "Disgust";
+            emotion = "DISGUST";
         }else if(largest == 3){
-            emotion = "Fear";
+            emotion = "FEAR";
         }else if(largest == 4){
-            emotion = "Happiness";
+            emotion = "HAPPY";
         }else if(largest == 5){
-            emotion = "Neutral";
+            emotion = "NEUTRAL";
         }else if(largest == 6){
-            emotion = "Sadness";
+            emotion = "SAD";
         }else{
-            emotion = "Suprise";
+            emotion = "SURPRISE";
         }
         return emotion;
     }
@@ -301,14 +300,14 @@ public class MainActivity extends Activity {
 
     public static String getAgeRange(double age) {
         double resultAge = age;
-        String ageRange = "Children";
+        String ageRange = "CHILDREN";
         if (resultAge < 25) {
-            ageRange = "Youth";
+            ageRange = "YOUTH";
         }
         if (resultAge < 59) {
-            ageRange = "Adult";
+            ageRange = "ADULT";
         } else if (resultAge > 59) {
-            ageRange = "Senior";
+            ageRange = "SENIOR";
         }
         return ageRange;
     }

@@ -25,20 +25,18 @@
 
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_width="48dp"
+            android:layout_height="36dp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="1dp"
             android:layout_marginTop="6dp"
-            android:layout_marginEnd="0dp"
             android:layout_toEndOf="@+id/search_est_button"
-            android:src="@drawable/iconfinder_profle_1055000"
-            android:onClick="showPopup"/>
+            android:onClick="showPopup"
+            android:src="@drawable/iconfinder_profle_1055000" />
 
         <EditText
             android:id="@+id/search_box"
-            android:layout_width="wrap_content"
+            android:layout_width="133dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -53,10 +51,10 @@
 
         <Button
             android:id="@+id/search_est_button"
-            android:layout_width="88dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="14dp"
             android:layout_toEndOf="@+id/search_box"
             android:onClick="searchButton" />
@@ -97,6 +95,71 @@
             android:onClick="detectFace"
             android:text="@string/search_face_button" />
 
+        <LinearLayout
+            android:id="@+id/category_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/search_face"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="5sp">
+
+            <ImageView
+                android:id="@+id/bakeshop_cat"
+                android:layout_width="100dp"
+                android:scaleType="centerInside"
+                android:layout_height="50dp"
+                android:src="@drawable/bakeshopicon"
+                android:onClick="bakeShopOnlick"/>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:scaleType="centerInside"
+                android:layout_height="50dp"
+                android:src="@drawable/burgericon"
+                android:onClick="burgerShopOnClick" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:scaleType="centerInside"
+                android:layout_height="50dp"
+                android:src="@drawable/coffeshopicon"
+                android:onClick="coffeeShopOnClick"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/category_menu_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category_menu"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="5sp">
+
+            <ImageView
+                android:id="@+id/bakeshop_cat_1"
+                android:layout_width="100dp"
+                android:scaleType="centerInside"
+                android:layout_height="50dp"
+                android:src="@drawable/icecreamicon"
+                android:onClick="iceCreamShopOnClick" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:scaleType="centerInside"
+                android:layout_height="50dp"
+                android:src="@drawable/pizzaicon"
+                android:onClick="pizzaShopOnlick" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:scaleType="centerInside"
+                android:layout_height="50dp"
+                android:src="@drawable/restauranticon"
+                android:onClick="restaurantOnClick" />
+
+        </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -105,7 +168,7 @@
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/search_face">
+            android:layout_below="@+id/category_menu_2">
 
             <LinearLayout
                 android:id="@+id/list"

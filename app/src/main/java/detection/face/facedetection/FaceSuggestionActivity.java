@@ -67,52 +67,10 @@ public class FaceSuggestionActivity extends AppCompatActivity {
                     String status = object.getString("status");
                     if ("success".equals(status)) {
                         JSONArray data = new JSONArray(object.getString("suggestion"));
-                        JSONArray other = new JSONArray(object.getString("other"));
-                        JSONObject rate = new JSONObject(object.getString("rate"));
-                        JSONObject rate_count = new JSONObject(object.getString("rate_count"));
                         suggestionLenght = data.length();
-                        otherLenght = other.length();
                         if(suggestionLenght != 0) {
                             for (int x = 0; x < suggestionLenght; x++) {
                                 String array = data.getString(x);
-                                JSONObject datas = new JSONObject(array);
-                                int estStatus = datas.getInt("est_status");
-                                if (estStatus == 1) {
-                                    View view = inflater.inflate(R.layout.activity_face_suggestion, scrollView, false);
-                                    ImageView imageView = view.findViewById(R.id.est_pic);
-                                    imageView.setPadding(20, 10, 10, 20);
-                                    Picasso.with(getApplicationContext())
-                                            .load(picUrl(datas.getString("est_front_store")))
-                                            .into(imageView);
-                                    imageView.setOnClickListener(new FaceSuggestionActivity.ClickEstablishment(datas.getString("establishment_name"), datas.getString("establishment_user_id")));
-
-                                    TextView estName = view.findViewById(R.id.est_name_face);
-                                    estName.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
-                                    estName.setText(datas.getString("establishment_name"));
-                                    estName.setOnClickListener(new FaceSuggestionActivity.ClickEstablishment(datas.getString("establishment_name"), datas.getString("establishment_user_id")));
-
-                                    TextView estAddress = view.findViewById(R.id.est_address_face);
-                                    estAddress.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
-                                    estAddress.setText(datas.getString("address"));
-
-                                    RatingBar ratingBar = view.findViewById(R.id.rating_bar_face);
-                                    ratingBar.setIsIndicator(true);
-                                    ratingBar.setNumStars(5);
-                                    ratingBar.setStepSize(0.1f);
-                                    ratingBar.setRating(Float.parseFloat(rate.getString(datas.getString("est_id"))));
-
-                                    TextView rateTotalAndCount = view.findViewById(R.id.rate_total_and_count_face);
-                                    rateTotalAndCount.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
-                                    rateTotalAndCount.setText("Total Rate : " + Float.parseFloat(rate.getString(datas.getString("est_id"))) +
-                                            " By: " + (Integer.parseInt(rate_count.getString(datas.getString("est_id"))) <= 1 ? Integer.parseInt(rate_count.getString(datas.getString("est_id"))) + " User" : Integer.parseInt(rate_count.getString(datas.getString("est_id"))) + " Users"));
-
-                                    scrollView.addView(view);
-                                }
-                            }
-                        }
-                        if(otherLenght != 0) {
-                            for (int i = 0; i < otherLenght; i++) {
-                                String array = other.getString(i);
                                 JSONObject datas = new JSONObject(array);
                                 int estStatus = datas.getInt("est_status");
                                 if (estStatus == 1) {
@@ -137,17 +95,57 @@ public class FaceSuggestionActivity extends AppCompatActivity {
                                     ratingBar.setIsIndicator(true);
                                     ratingBar.setNumStars(5);
                                     ratingBar.setStepSize(0.1f);
-                                    ratingBar.setRating(Float.parseFloat(rate.getString(datas.getString("est_id"))));
+                                    ratingBar.setRating(datas.getLong("rate"));
 
                                     TextView rateTotalAndCount = view.findViewById(R.id.rate_total_and_count_face);
                                     rateTotalAndCount.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
-                                    rateTotalAndCount.setText("Total Rate : " + Float.parseFloat(rate.getString(datas.getString("est_id"))) +
-                                            " By: " + (Integer.parseInt(rate_count.getString(datas.getString("est_id"))) <= 1 ? Integer.parseInt(rate_count.getString(datas.getString("est_id"))) + " User" : Integer.parseInt(rate_count.getString(datas.getString("est_id"))) + " Users"));
+                                    double totalRateDouble = (datas.getDouble("rate"));
+                                    int totalRateCount = datas.getInt("rate_count");
+                                    rateTotalAndCount.setText("Total Rate : " + String.format("%.1f", totalRateDouble) +
+                                            " By: " + (totalRateCount <= 1 ? datas.getInt("rate_count") + " User" : datas.getInt("rate_count") +" Users" ));
 
                                     scrollView.addView(view);
                                 }
                             }
                         }
+//                        if(otherLenght != 0) {
+//                            for (int i = 0; i < otherLenght; i++) {
+//                                String array = other.getString(i);
+//                                JSONObject datas = new JSONObject(array);
+//                                int estStatus = datas.getInt("est_status");
+//                                if (estStatus == 1) {
+//                                    View view = inflater.inflate(R.layout.facial_suggestion_content, scrollView, false);
+//                                    ImageView imageView = view.findViewById(R.id.est_pic_face);
+//                                    imageView.setPadding(20, 10, 10, 20);
+//                                    Picasso.with(getApplicationContext())
+//                                            .load(picUrl(datas.getString("est_front_store")))
+//                                            .into(imageView);
+//                                    imageView.setOnClickListener(new FaceSuggestionActivity.ClickEstablishment(datas.getString("establishment_name"), datas.getString("establishment_user_id")));
+//
+//                                    TextView estName = view.findViewById(R.id.est_name_face);
+//                                    estName.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
+//                                    estName.setText(datas.getString("establishment_name"));
+//                                    estName.setOnClickListener(new FaceSuggestionActivity.ClickEstablishment(datas.getString("establishment_name"), datas.getString("establishment_user_id")));
+//
+//                                    TextView estAddress = view.findViewById(R.id.est_address_face);
+//                                    estAddress.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
+//                                    estAddress.setText(datas.getString("address"));
+//
+//                                    RatingBar ratingBar = view.findViewById(R.id.rating_bar_face);
+//                                    ratingBar.setIsIndicator(true);
+//                                    ratingBar.setNumStars(5);
+//                                    ratingBar.setStepSize(0.1f);
+//                                    ratingBar.setRating(Float.parseFloat(rate.getString(datas.getString("est_id"))));
+//
+//                                    TextView rateTotalAndCount = view.findViewById(R.id.rate_total_and_count_face);
+//                                    rateTotalAndCount.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
+//                                    rateTotalAndCount.setText("Total Rate : " + Float.parseFloat(rate.getString(datas.getString("est_id"))) +
+//                                            " By: " + (Integer.parseInt(rate_count.getString(datas.getString("est_id"))) <= 1 ? Integer.parseInt(rate_count.getString(datas.getString("est_id"))) + " User" : Integer.parseInt(rate_count.getString(datas.getString("est_id"))) + " Users"));
+//
+//                                    scrollView.addView(view);
+//                                }
+//                            }
+//                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

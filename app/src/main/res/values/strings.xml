@@ -6,6 +6,8 @@
     <string name="search_button">Search</string>
     <string name="search_text">Search…</string>
     <string name="product_list_label">PRODUCT LIST</string>
+    <string name="rate_me">RATE ME! Click Here.</string>
+    <string name="comment_section">COMMENT LIST</string>
     <string-array name="filter">
         <item>Establishment</item>
         <item>Food</item>

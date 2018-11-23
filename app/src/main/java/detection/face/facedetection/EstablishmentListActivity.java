@@ -61,22 +61,6 @@ public class EstablishmentListActivity extends AppCompatActivity {
         });
 
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.action_logout:
-//                save("account_id","");
-//                save("first_name","");
-//                save("last_name","");
-//                startActivity(new Intent(this,LoginActivity.class));
-//                break;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//
-//        return true;
-//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,8 +100,6 @@ public class EstablishmentListActivity extends AppCompatActivity {
                     String status = object.getString("status");
                     if ("success".equals(status)) {
                         JSONArray data = new JSONArray(object.getString("data"));
-                        JSONObject rate = new JSONObject(object.getString("rate"));
-                        JSONObject rate_count = new JSONObject(object.getString("rate_count"));
                         lenght = data.length();
                         for (int x = 0; x < lenght; x++) {
                             String array = data.getString(x);
@@ -145,12 +127,14 @@ public class EstablishmentListActivity extends AppCompatActivity {
                                 ratingBar.setIsIndicator(true);
                                 ratingBar.setNumStars(5);
                                 ratingBar.setStepSize(0.1f);
-                                ratingBar.setRating(Float.parseFloat(rate.getString(datas.getString("est_id"))));
+                                ratingBar.setRating(datas.getLong("rate"));
 
                                 TextView rateTotalAndCount = view.findViewById(R.id.rate_total_and_count);
                                 rateTotalAndCount.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
-                                rateTotalAndCount.setText("Total Rate : " + Float.parseFloat(rate.getString(datas.getString("est_id"))) +
-                                        " By: " + (Integer.parseInt(rate_count.getString(datas.getString("est_id"))) <= 1 ? Integer.parseInt(rate_count.getString(datas.getString("est_id"))) + " User" : Integer.parseInt(rate_count.getString(datas.getString("est_id"))) +" Users" ));
+                                double totalRateDouble = (datas.getDouble("rate"));
+                                int totalRateCount = datas.getInt("rate_count");
+                                rateTotalAndCount.setText("Total Rate : " + String.format("%.1f", totalRateDouble) +
+                                        " By: " + (totalRateCount <= 1 ? datas.getInt("rate_count") + " User" : datas.getInt("rate_count") +" Users" ));
 
                                 scrollView.addView(view);
                             }
@@ -224,5 +208,35 @@ public class EstablishmentListActivity extends AppCompatActivity {
         edit.putString(key, value);
         edit.apply();
 
+    }
+    public void bakeShopOnlick(View v){
+        if(scrollView.getChildCount() != 0)
+            scrollView.removeAllViews();
+        getEstRegistered("","Bake Shop","");
+    }
+    public void burgerShopOnClick(View v){
+        if(scrollView.getChildCount() != 0)
+            scrollView.removeAllViews();
+        getEstRegistered("","Burger Stall","");
+    }
+    public void coffeeShopOnClick(View v){
+        if(scrollView.getChildCount() != 0)
+            scrollView.removeAllViews();
+        getEstRegistered("","Coffee Shop","");
+    }
+    public void iceCreamShopOnClick(View v){
+        if(scrollView.getChildCount() != 0)
+            scrollView.removeAllViews();
+        getEstRegistered("","Dessert","");
+    }
+    public void pizzaShopOnlick(View v){
+        if(scrollView.getChildCount() != 0)
+            scrollView.removeAllViews();
+        getEstRegistered("","Pizza House","");
+    }
+    public void restaurantOnClick(View v){
+        if(scrollView.getChildCount() != 0)
+            scrollView.removeAllViews();
+        getEstRegistered("","Bake Shop","");
     }
 }

@@ -33,5 +33,7 @@ public class Constant {
     static final String GET_FACE_SUGGESTION = "https://darkened-career.000webhostapp.com/api/face_suggestion";
     static final String PUBLIC_IMAGE_PATH = "https://darkened-career.000webhostapp.com/images/";
     static final String GET_PRODUCT_BY_ESTABLISHMENT = "https://darkened-career.000webhostapp.com/api/get_est_product";
+    static final String GET_COMMENT_BY_EST = "https://darkened-career.000webhostapp.com/api/get_est_comment";
+    static final String SUBMIT_COMMENT_AND_RATE = "https://darkened-career.000webhostapp.com/api/submit_rate_comment";
 
 }

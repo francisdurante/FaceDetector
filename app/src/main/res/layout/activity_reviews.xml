@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReviewsActivity"
+    android:background="@drawable/background_image">
+
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4.5"
+        android:textSize="80sp"
+        android:paddingTop="20sp"
+        android:paddingStart="30sp"
+        android:paddingEnd="30sp"
+        android:textColor="#000"
+        android:drawableBottom="@drawable/iconfinder_icon_23_star_3147551"/>
+
+
+    <TextView
+        android:id="@+id/est_name_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="25dp"
+        android:layout_toEndOf="@+id/rating"
+        android:text="Phim Phimz Sizzling"
+        android:textColor="#000"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/est_address_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/est_name_rating"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/rating"
+        android:text="Phim Phimz Sizzling"
+        android:textColor="#000"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/rate_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/est_address_rating"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/rating"
+        android:background="@drawable/rounded_button"
+        android:onClick="rateMeLinkOnClick"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/show_review"
+        android:textColor="#000"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/comment_section_rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rating"
+        android:layout_alignParentStart="false"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/comment_section"
+        android:textColor="#FFF"
+        android:textSize="15sp" />
+
+    <ScrollView
+        android:id="@+id/comment_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/comment_section_rating"
+        android:paddingTop="10sp"
+        android:background="@drawable/linear_border_black"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+    <LinearLayout
+        android:id="@+id/comment_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/no_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_comment"
+            android:padding="10sp"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:visibility="gone"/>
+    </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

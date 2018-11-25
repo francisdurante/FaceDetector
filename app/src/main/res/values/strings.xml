@@ -6,8 +6,9 @@
     <string name="search_button">Search</string>
     <string name="search_text">Search…</string>
     <string name="product_list_label">PRODUCT LIST</string>
-    <string name="rate_me">RATE ME! Click Here.</string>
-    <string name="comment_section">COMMENT LIST</string>
+    <string name="show_review"><b>Make Review</b></string>
+    <string name="show_review_01"><b>Show Review</b></string>
+    <string name="comment_section"><b>REVIEWS</b></string>
     <string-array name="filter">
         <item>Establishment</item>
         <item>Food</item>
@@ -17,5 +18,6 @@
     <string name="search_main">Search</string>
     <string name="best_suggestion">Best Suggestion</string>
     <string name="other_suggestion">Other Suggestion</string>
-    <string name="title_activity_basic_test">BasicTest</string>
+    <string name="no_result_found"><b>NO RESULT FOUND</b></string>
+    <string name="no_comment"><b>NO COMMENT POSTED</b></string>
 </resources>

@@ -10,6 +10,7 @@ public class Constant {
     static final String ATLEAST_SIX_CHARACTERS = "Password must be Greater Than Or Equal to 6 Characters";
     static final String MISMATCH_PASSWORD = "Password And Retype Password Not Match";
     static final String PLEASE_WAIT = "Please Wait...";
+    static final String SEARCHING = "Searching...";
     static final String AGE_REQUIRED = "Age Field is Required";
     static final String PREFERRED_FOOD_REQUIRED = "Preferred Food Field is Required";
     static final String EXISTING = "User Already Exist";

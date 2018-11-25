@@ -54,8 +54,9 @@
         <activity
             android:name=".EstablishmentListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".EstablishmentDetailsActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".EstablishmentDetailsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".SplashScreenActivity"
             android:label="@string/app_name"
@@ -67,6 +68,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".FaceSuggestionActivity" />
+        <activity android:name=".ReviewsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

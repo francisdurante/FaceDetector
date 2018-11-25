@@ -1,5 +1,6 @@
 package detection.face.facedetection;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -38,7 +39,7 @@ public class EstablishmentListActivity extends AppCompatActivity {
     Spinner mSpinner;
     SharedPreferences spf;
     PopupMenu popupMenu;
-
+    ProgressDialog mDialog;
     public void showPopup(View v) {
         popupMenu = new PopupMenu(this, v);
         MenuInflater inflater = popupMenu.getMenuInflater();
@@ -90,6 +91,7 @@ public class EstablishmentListActivity extends AppCompatActivity {
         }
         searchButton.setText(Constant.LOADING);
         searchButton.setEnabled(false);
+        showProgressBar();
         Utility.getByUrl(Constant.GET_REGISTERED_EST, rp, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -112,12 +114,12 @@ public class EstablishmentListActivity extends AppCompatActivity {
                                 Picasso.with(getApplicationContext())
                                         .load(picUrl(datas.getString("est_front_store")))
                                         .into(imageView);
-                                imageView.setOnClickListener(new ClickEstablishment(datas.getString("establishment_name"), datas.getString("establishment_user_id")));
+                                imageView.setOnClickListener(new ClickEstablishment(datas.getString("establishment_name"), datas.getString("establishment_user_id"),String.format("%.1f", datas.getDouble("rate")),datas.getString("address")));
 
                                 TextView estName = view.findViewById(R.id.est_name);
                                 estName.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
                                 estName.setText(datas.getString("establishment_name"));
-                                estName.setOnClickListener(new ClickEstablishment(datas.getString("establishment_name"), datas.getString("establishment_user_id")));
+                                estName.setOnClickListener(new ClickEstablishment(datas.getString("establishment_name"), datas.getString("establishment_user_id"),String.format("%.1f", datas.getDouble("rate")),datas.getString("address")));
 
                                 TextView estAddress = view.findViewById(R.id.est_address);
                                 estAddress.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
@@ -148,6 +150,8 @@ public class EstablishmentListActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                hideProgressBar();
             }
         });
 
@@ -161,9 +165,13 @@ public class EstablishmentListActivity extends AppCompatActivity {
 
         String estName;
         String id;
-        ClickEstablishment(String key,String id) {
+        String rate;
+        String address;
+        ClickEstablishment(String key,String id,String rate, String address) {
             this.estName = key;
             this.id = id;
+            this.rate = rate;
+            this.address = address;
         }
 
         @Override
@@ -173,6 +181,8 @@ public class EstablishmentListActivity extends AppCompatActivity {
             Bundle establishmentname = new Bundle();
             establishmentname.putString("estName",estName);
             establishmentname.putString("id",id);
+            establishmentname.putString("rate",rate);
+            establishmentname.putString("address",address);
             estProduct.putExtras(establishmentname);
             startActivity(estProduct);
         }
@@ -238,5 +248,14 @@ public class EstablishmentListActivity extends AppCompatActivity {
         if(scrollView.getChildCount() != 0)
             scrollView.removeAllViews();
         getEstRegistered("","Bake Shop","");
+    }
+    public void showProgressBar(){
+        mDialog = new ProgressDialog(EstablishmentListActivity.this);
+        mDialog.setMessage(Constant.SEARCHING);
+        mDialog.setCanceledOnTouchOutside(false);
+        mDialog.show();
+    }
+    public void hideProgressBar(){
+        mDialog.dismiss();
     }
 }

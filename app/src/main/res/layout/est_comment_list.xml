@@ -20,7 +20,8 @@
             android:layout_weight="1"
             android:textColor="#FFF"
             android:textSize="25sp"
-            android:paddingStart="20sp"/>
+            android:paddingStart="15sp"
+            android:drawableLeft="@drawable/iconfinder_profle_1055000"/>
 
         <TextView
             android:id="@+id/comment"
@@ -38,6 +39,7 @@
             android:textColor="#FFF"
             android:gravity="end"
             android:textSize="15sp"
-            android:paddingEnd="25sp"/>
+            android:paddingEnd="25sp"
+            android:paddingBottom="10sp"/>
     </LinearLayout>
 </LinearLayout>

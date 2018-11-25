@@ -32,82 +32,110 @@
 
         <Button
             android:id="@+id/navigate_est"
-            android:layout_width="335dp"
+            android:layout_width="166dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/est_name_product"
             android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginEnd="25dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/rate_link"
             android:background="@drawable/rounded_button"
             android:onClick="map"
             android:paddingStart="10dp"
             android:paddingEnd="20dp"
-            android:text="Navigate" />
+            android:text="DIRECTION"
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:id="@+id/product_list_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/est_name_product"
             android:layout_alignParentStart="false"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:textColor="#FFF"
-            android:textSize="15sp"
             android:text="@string/product_list_label"
-            android:layout_below="@+id/rate_link"/>
+            android:textColor="#FFF"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/rate_link"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="false"
-            android:layout_marginTop="10dp"
+            android:layout_width="162dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/rounded_button"
             android:gravity="center"
-            android:textColor="#FFF"
+            android:onClick="showReviews"
+            android:text="@string/show_review_01"
+            android:textColor="#000"
             android:textSize="15sp"
-            android:text="@string/rate_me"
-            android:onClick="rateMeLinkOnClick"
-            android:layout_below="@+id/navigate_est"/>
+            android:layout_marginBottom="5dp"/>
 
         <ScrollView
             android:id="@+id/product_list_view"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_below="@+id/product_list_label">
+            android:layout_height="match_parent"
+            android:layout_above="@+id/rate_link"
+            android:layout_below="@+id/product_list_label"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/linear_border_black">
+
 
             <LinearLayout
                 android:id="@+id/product_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:gravity="center"/>
+                >
+                <TextView
+                    android:id="@+id/no_result_found"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_result_found"
+                    android:padding="10sp"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:visibility="gone"/>
+            </LinearLayout>
 
         </ScrollView>
-        <TextView
-            android:id="@+id/comment_section"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="false"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:textColor="#FFF"
-            android:textSize="15sp"
-            android:text="@string/comment_section"
-            android:layout_below="@+id/product_list_view"/>
-        <ScrollView
-            android:id="@+id/comment_scroll_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/comment_section">
-        <LinearLayout
-            android:id="@+id/comment_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"/>
-        </ScrollView>
+
+        <!--<TextView-->
+            <!--android:id="@+id/comment_section"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/navigate_est"-->
+            <!--android:layout_alignParentStart="false"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/comment_section"-->
+            <!--android:textColor="#FFF"-->
+            <!--android:textSize="15sp" />-->
+
+        <!--<ScrollView-->
+            <!--android:id="@+id/comment_scroll_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@+id/comment_section"-->
+            <!--android:paddingTop="10sp"-->
+            <!--android:background="@drawable/linear_border_black"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--android:layout_marginEnd="10dp">-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/comment_list"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:orientation="vertical"/>-->
+        <!--</ScrollView>-->
     </RelativeLayout>
 
 

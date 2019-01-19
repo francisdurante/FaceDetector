@@ -171,6 +171,7 @@ public class ReviewsActivity extends AppCompatActivity {
             rateBar.setMax(5);
             rateBar.setStepSize(1f);
             final EditText input = new EditText(getApplicationContext());
+            input.setHint("Write a comment...   ");
             LinearLayout ll = new LinearLayout(ReviewsActivity.this);
             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -185,7 +186,7 @@ public class ReviewsActivity extends AppCompatActivity {
             builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    if (input.getText().length() >= 50) {
+                    if (input.getText().toString().length() >= 50) {
                         Toast.makeText(getApplicationContext(), "Limit of 50 characters", Toast.LENGTH_LONG).show();
                     } else if (rateBar.getRating() == 0) {
                         Toast.makeText(getApplicationContext(), "Please rate minimum of 1 star", Toast.LENGTH_LONG).show();

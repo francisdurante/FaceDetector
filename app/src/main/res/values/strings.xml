@@ -13,6 +13,39 @@
         <item>Establishment</item>
         <item>Food</item>
     </string-array>
+    <string-array name="preferred_food">
+        <item>Dessert</item>
+        <item>Burger</item>
+        <item>Coffee</item>
+        <item>Ice Cream</item>
+        <item>Pizza</item>
+        <item>Restaurant</item>
+    </string-array>
+    <string-array name="questions_sad">
+        <item>Are you happy with yourself?</item>
+        <item>What have you done that you are not proud of?</item>
+        <item>Do you feel excessively guilty over small mistakes?</item>
+        <item>Do you avoid spending time with people you love, because you would rather be alone?</item>
+        <item>Are you very easily irritated?</item>
+        <item>Do you feel empty inside?</item>
+        <item>8What promises have you never carried through for yourself?</item>
+        <item>How do you feel today?</item>
+        <item>What scares you about your future?</item>
+        <item>Am I a better person today, than I was yesterday?</item>
+        <item>Do you regret anything?</item>
+        <item>What do you do when you’re feeling lonely?</item>
+        <item>What’s something you strongly dislike/hate?</item>
+        <item>What is one thing you’ve had to forgive yourself for?</item>
+    </string-array>
+
+    <string-array name="questions_irritate">
+        <item>Things have been bothering me more than they normally do</item>
+        <item>I have been feeling irritable</item>
+        <item>I have been grumpy</item>
+        <item>I have been feeling like I a snap</item>
+        <item>Other people have been getting on my nerves</item>
+    </string-array>
+
     <string name="search_face_button">Use Face Recognition</string>
     <string name="re_capture">Re Capture</string>
     <string name="search_main">Search</string>

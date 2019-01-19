@@ -1,11 +1,15 @@
 package detection.face.facedetection;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,9 +36,9 @@ public class LoginActivity extends AppCompatActivity {
         if(!"".equals(getString("account_id")) &&
                 !"".equals(getString("first_name")) &&
                 !"".equals(getString("last_name"))){
-            Intent redirect = new Intent(getApplicationContext(),EstablishmentListActivity.class);
-            startActivity(redirect);
-            finish();
+            String name = "<b>" + getString("first_name") +" " + getString("last_name") + "</b>";
+            CharSequence fullName = Html.fromHtml(name);
+            showLoginDialogBox("Currently logged in : " + fullName + "\nDo you want to continue?");
         }
         un = findViewById(R.id.username_login);
         pass = findViewById(R.id.password_login);
@@ -120,4 +124,28 @@ public class LoginActivity extends AppCompatActivity {
         Intent registration = new Intent(getApplicationContext(),RegistrationActivity.class);
         startActivity(registration);
     }
+    public void showLoginDialogBox(String message){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Login");
+        dialog.setMessage(message);
+        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent redirect = new Intent(getApplicationContext(),EstablishmentListActivity.class);
+                startActivity(redirect);
+                finish();
+            }
+        });
+        dialog.setNegativeButton("LOG OUT", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                save("first_name","");
+                save("last_name","");
+                save("account_id","");
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
 }

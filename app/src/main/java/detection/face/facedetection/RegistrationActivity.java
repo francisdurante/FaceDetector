@@ -5,7 +5,11 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.Api;
@@ -21,6 +25,7 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText preferredFood = null;
     Context mContext = this;
     CountDownTimer cTimer = null;
+    Spinner mSpinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +37,8 @@ public class RegistrationActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         reTypePassword = findViewById(R.id.repassword);
         age = findViewById(R.id.age);
-        preferredFood = findViewById(R.id.preferred_food);
+        mSpinner = findViewById(R.id.preferred_food);
+        spinnerItem();
     }
 
     public void register(View v){
@@ -50,8 +56,6 @@ public class RegistrationActivity extends AppCompatActivity {
             Toast.makeText(mContext,Constant.MISMATCH_PASSWORD,Toast.LENGTH_LONG).show();
         }else if(age.getText().toString().equals("")){
             Toast.makeText(mContext,Constant.AGE_REQUIRED,Toast.LENGTH_LONG).show();
-        }else if(preferredFood.getText().toString().equals("")){
-            Toast.makeText(mContext,Constant.PREFERRED_FOOD_REQUIRED,Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(mContext,Constant.PLEASE_WAIT,Toast.LENGTH_LONG).show();
             new ApiClass(Constant.REGISTRATION_URL,
@@ -61,7 +65,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     email.getText().toString(),
                     password.getText().toString(),
                     age.getText().toString(),
-                    preferredFood.getText().toString(),
+                    mSpinner.getSelectedItem().toString(),
                     Constant.REGISTRATION).execute();
 
             cTimer = new CountDownTimer(7000, 1000) {
@@ -81,6 +85,26 @@ public class RegistrationActivity extends AppCompatActivity {
             }.start();
         }
     }
+
+    public void spinnerItem(){
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.preferred_food));
+        mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinner.setAdapter(mAdapter);
+        mSpinner.setOnItemSelectedListener(listener);
+    }
+
+    private AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            ((TextView) parent.getChildAt(0)).setTextColor(0xFFFFFFFF);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
 
     @Override
     public void onBackPressed() {

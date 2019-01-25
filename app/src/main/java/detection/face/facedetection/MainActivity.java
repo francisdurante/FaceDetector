@@ -67,38 +67,6 @@ public class MainActivity extends Activity {
             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, Constant.CAMERA_REQUEST);
         }
-//                Intent map = new Intent(mContext,MapsActivity.class);
-//                startActivity(map);
-
-//        Button photoButton = (Button) this.findViewById(R.id.button1);
-//        Button map = (Button) this.findViewById(R.id.button2);
-
-//        photoButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @RequiresApi(api = Build.VERSION_CODES.M)
-//            @Override
-//            public void onClick(View v) {
-//                if (checkSelfPermission(Manifest.permission.CAMERA)
-//                        != PackageManager.PERMISSION_GRANTED) {
-//                    requestPermissions(new String[]{Manifest.permission.CAMERA},
-//                            Constant.MY_CAMERA_PERMISSION_CODE);
-//                } else {
-//                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//                    startActivityForResult(cameraIntent, Constant.CAMERA_REQUEST);
-//                }
-////                Intent map = new Intent(mContext,MapsActivity.class);
-////                startActivity(map);
-//            }
-//        });
-//        map.setOnClickListener(new View.OnClickListener() {
-//
-//            @RequiresApi(api = Build.VERSION_CODES.M)
-//            @Override
-//            public void onClick(View v) {
-//                Intent map = new Intent(mContext,MapsActivity.class);
-//                startActivity(map);
-//            }
-//        });
     }
 
     @Override

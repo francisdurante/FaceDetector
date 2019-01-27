@@ -168,7 +168,6 @@ public class Utility {
         edit.apply();
     }
     public static String getString(String key,Context context) {
-
         spf = PreferenceManager.getDefaultSharedPreferences(context);
         return spf.getString(key,"");
     }

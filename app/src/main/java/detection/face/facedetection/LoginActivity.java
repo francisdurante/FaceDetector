@@ -356,7 +356,6 @@ public class LoginActivity extends AppCompatActivity {
                         face.faceAttributes.emotion.anger,
                         face.faceAttributes.emotion.happiness,
                         face.faceAttributes.emotion.sadness,};
-//                smile.setText("EMOTION : " + getEmotion(emotion));
                 emotion_result = getEmotion(emotion);
                 age_result = getAgeRange(face.faceAttributes.age);
                 save("INITIAL_EMOTION",emotion_result);

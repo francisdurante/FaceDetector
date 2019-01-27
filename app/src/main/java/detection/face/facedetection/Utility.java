@@ -1,6 +1,23 @@
 package detection.face.facedetection;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -12,6 +29,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import cz.msebera.android.httpclient.Header;
 
 public class Utility {
@@ -19,6 +41,8 @@ public class Utility {
     private static AsyncHttpClient client = new AsyncHttpClient();
     static String statusReward = "";
     private static Context mContext;
+    static SharedPreferences spf;
+
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.get(getAbsoluteUrl(url), params, responseHandler);
     }
@@ -77,5 +101,75 @@ public class Utility {
                 }
             }
         });
+    }
+
+    public static void getRandomTrivia(final Context context , final Activity activity){
+        final AlertDialog alertDialog = new AlertDialog.Builder(
+                        context).create();
+        final Handler mHandler = new Handler();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                while (true) {
+                    try {
+                        Thread.sleep(1000*60*60);
+                        mHandler.post(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                if(!alertDialog.isShowing()) {
+                                    final String[] array = context.getResources().getStringArray(R.array.trivia);
+                                    final String randomStr = array[new Random().nextInt(array.length)];
+                                    alertDialog.setTitle("WE HAVE A FOOD TRIVIA FOR YOU");
+                                    alertDialog.setMessage(randomStr);
+                                    alertDialog.show();
+                                }else{
+                                    new CountDownTimer(3000, 1000) {
+                                        @Override
+                                        public void onTick(long millisUntilFinished) {
+
+                                        }
+
+                                        @Override
+                                        public void onFinish() {
+                                            alertDialog.dismiss();
+                                        }
+                                    }.start();
+                                }
+                            }
+                        });
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static void popupForQuestions(final Context context, final Activity activity){
+
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        alertDialog.setTitle("Questions");
+        alertDialog.setMessage("We have some questions for you.\nDo you mind answering them?");
+        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                activity.startActivity(new Intent(context,QuestionsActivity.class));
+            }
+        });
+        alertDialog.show();
+    }
+
+    public static void save(String key, String value,Context context) {
+        spf = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor edit = spf.edit();
+        edit.putString(key, value);
+        edit.apply();
+    }
+    public static String getString(String key,Context context) {
+
+        spf = PreferenceManager.getDefaultSharedPreferences(context);
+        return spf.getString(key,"");
     }
 }

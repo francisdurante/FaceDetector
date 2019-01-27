@@ -1,6 +1,7 @@
 package detection.face.facedetection;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -32,6 +33,8 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 public class EstablishmentListActivity extends AppCompatActivity {
+
+    Context mContext = this;
     int lenght;
     LinearLayout scrollView;
     TextView searchKey;
@@ -40,6 +43,7 @@ public class EstablishmentListActivity extends AppCompatActivity {
     SharedPreferences spf;
     PopupMenu popupMenu;
     ProgressDialog mDialog;
+    LinearLayout questionLinear;
     public void showPopup(View v) {
         popupMenu = new PopupMenu(this, v);
         MenuInflater inflater = popupMenu.getMenuInflater();
@@ -66,6 +70,8 @@ public class EstablishmentListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_establishment_list);
+        questionLinear = findViewById(R.id.questions_place);
+
         getWindow().setBackgroundDrawableResource(R.drawable.background_image);
         searchKey = findViewById(R.id.search_box);
         searchButton = findViewById(R.id.search_est_button);
@@ -77,6 +83,8 @@ public class EstablishmentListActivity extends AppCompatActivity {
         mSpinner.setAdapter(mAdapter);
         mSpinner.setOnItemSelectedListener(listener);
         getEstRegistered("","",GlobalVO.getPreferredFood());
+        Utility.popupForQuestions(mContext,this);
+        Utility.getRandomTrivia(mContext,this);
     }
 
     public void getEstRegistered(String est_key,String category_key,String food) {

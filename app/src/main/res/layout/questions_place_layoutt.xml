@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="1. Question"
+        android:textStyle="bold"
+        android:paddingStart="20sp"
+        android:paddingEnd="10sp"
+        android:id="@+id/questions"
+        android:textColor="#FFF"
+        />
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/radio_group">
+    <RadioButton
+        android:id="@+id/agree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="10sp"
+        android:paddingEnd="10sp"
+        android:layout_marginStart="15sp"
+        android:text="Agree"
+        android:textSize="20sp"
+        android:textColor="#FFF"/>
+    <RadioButton
+        android:id="@+id/disagree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="10sp"
+        android:paddingEnd="10sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginStart="15sp"
+        android:text="Disagree"
+        android:textSize="20sp"
+        android:textColor="#FFF"/>
+
+    <RadioButton
+        android:id="@+id/strongly_disagree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="10sp"
+        android:paddingEnd="10sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginStart="15sp"
+        android:text="Strongly Disagree"
+        android:textSize="20sp"
+        android:textColor="#FFF"/>
+    </RadioGroup>
+</LinearLayout>

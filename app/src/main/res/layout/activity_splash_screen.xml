@@ -21,7 +21,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="282dp"
-            android:src="@drawable/eateryfinderlogo" />
+            android:src="@drawable/new_logo"/>
 
     </RelativeLayout>
 

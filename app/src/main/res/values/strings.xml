@@ -28,7 +28,7 @@
         <item>Do you avoid spending time with people you love, because you would rather be alone?</item>
         <item>Are you very easily irritated?</item>
         <item>Do you feel empty inside?</item>
-        <item>8What promises have you never carried through for yourself?</item>
+        <item>What promises have you never carried through for yourself?</item>
         <item>How do you feel today?</item>
         <item>What scares you about your future?</item>
         <item>Am I a better person today, than I was yesterday?</item>
@@ -46,6 +46,50 @@
         <item>Other people have been getting on my nerves</item>
     </string-array>
 
+    <string-array name="trivia">
+        <item>Did you know that added sugar is being implicated as a leading cause of obesity and heart disease?</item>
+        <item>Did you know that eating vegetables are rich in all sorts of nutrients. Eating vegetables each day is associated with improved health and a lower risk of disease.</item>
+        <item>Did you know that the skin makes vitamin D when it is exposed to ultraviolet rays from the sun?</item>
+        <item>Did you know that adopting a healthy lifestyle is the only way to ensure long-term weight loss and a lifetime of improved health?</item>
+        <item>Broccoli is a cruciferous vegetable that contains sulforaphane, a compound that may prevent cancer growth. Eating broccoli may also help reduce the risk of chronic disease by protecting against oxidative stress.</item>
+        <item>Did you know that adding protein to your meals can help slow the absorption of carbohydrates in your blood and increase the release of dopamine and norepinephrine, which may improve your mood and energy for several hours after eating?</item>
+        <item>Did you know that vitamin D may help relieve mood disorders, such as seasonal affective disorder?</item>
+        <item>Did you know that fiber can both increase serotonin and decrease mood swing? </item>
+        <item>Did you know that intake of bell pepper can lower the risk of developing cancer such as colon, lung, pancreatic?</item>
+        <item>Onions are an excellent antioxidant, and they contain anti-allergy, antiviral and antihistamine properties.</item>
+        <item>Did you know that the typical dinner plate today is 36 percent bigger than one from the 1960s?</item>
+        <item>Did you know that chocolate bars were invented by Fry and Sons in 1847 in England.</item>
+        <item>Are you aware that pie, cheesecake and ice cream rank 1, 2, 3 as American favorite desserts?</item>
+        <item>Studies suggest that sugar may raise cholesterol levels.</item>
+        <item>Did you know that walnuts, peanuts and almonds are rich in fiber and omega 3 fats that help digestion?</item>
+        <item>Drinking six to eight glasses of water a day will help you stay hydrated.</item>
+        <item>Did you know that the orange color of the carrot was the result of Dutch cultivation in the 17th Century when patriotic growers turned a vegetable which was then purple into the color of the national flag?</item>
+        <item>Did you know that you can use cucumbers as erasers? </item>
+        <item>Did you know that the veggie skins have the most nutrients?</item>
+        <item>Did you know that the potatoes were the first food to be grown in space?</item>
+        <item>Did you know that eating fast foods can lead to an increased risk for depression?</item>
+        <item>Did you know that being bored can drive you to eat?</item>
+        <item>Did you know that your emotions can change how you taste food?</item>
+        <item>Did you know that eating dark chocolate make you happy?</item>
+        <item>Did you know that bananas helps to boost your mood and also aids sleep because of its ability to raise serotonin levels?</item>
+    </string-array>
+
+    <string-array name="trivia_smiling">
+        <item><b>Did you know that Smiling is contagious?</b>\nAccording to science, neurons in the brain have a synchronizing feature that keeps you in sync with who are you speaking to. If they smile, you will smile!</item>
+        <item><b>Did you know that Smiling is like medicine.?</b>\nGenuine smiles — where you smile big enough to squint your eyes — boosts your immune system by decreasing cortisol in you body.</item>
+        <item><b>Did you know that Smiling is our first facial expression?</b>\nIt might not mean anything until we are a little bit older, but babies start smiling in the womb.</item>
+        <item><b>Did you know that Forcing yourself to smile when you are sad will actually elevate your mood.?</b>\nThanks to endorphins from smiling, faking it till you make it actually works!</item>
+        <item><b>Did you know that Smiling makes you look prettier.?</b>\nStudies have proven that 70% of people find smiling faces to be better-looking than faces with makeup.</item>
+        <item><b>Did you know that Smiling is a form of exercise?</b>\nIt takes 26 muscles to smile – so work out your face!</item>
+        <item><b>Did you know that Employers tend to promote people who smile often.?</b>\nSmiling shows your boss that you are engaged and easy to work with, i.e. it is your way up the corporate ladder.</item>
+        <item><b>Did you know that There are 19 different types of smiles?</b>\nScientists have determined that there are 19 kinds of smiles ranging from overjoyed to polite.</item>
+        <item><b>Did you know that It is easier to smile than frown?</b>\nIt is easier to smile than frown.</item>
+        <item><b>Did you know that We can detect smiles from far away?</b>\nHumans can detect smiles from more than 300 feet away, which developed out of a need to be able to distinguish friend from foe.</item>
+        <item><b>Did you know that Smiling is a universal sign for happiness?</b>\nWhile it is not always easy to identify a genuine smile, all people — and even some animals — recognize a smile and what it means.</item>
+        <item><b>Did you know that Smiling can reduce blood pressure?</b>\nNot only will those endorphins elevate your mood, but they will also lower your blood pressure — so essentially, smiles save lives!</item>
+    </string-array>
+    <!--reference https://www.buzzfeed.com/smiletrain/facts-about-smiles-you-never-knew-->
+
     <string name="search_face_button">Use Face Recognition</string>
     <string name="re_capture">Re Capture</string>
     <string name="search_main">Search</string>
@@ -53,4 +97,5 @@
     <string name="other_suggestion">Other Suggestion</string>
     <string name="no_result_found"><b>NO RESULT FOUND</b></string>
     <string name="no_comment"><b>NO COMMENT POSTED</b></string>
+    <string name="you_are_agreed_to_answer_this_some_questions">You are agreed to answer this some questions.</string>
 </resources>

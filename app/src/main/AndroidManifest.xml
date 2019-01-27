@@ -5,8 +5,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.Camera" />
     <uses-feature android:name="android.hardware." />
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -56,7 +58,7 @@
         <activity
             android:name=".EstablishmentListActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".EstablishmentDetailsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
@@ -71,8 +73,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".FaceSuggestionActivity" />
-        <activity android:name=".ReviewsActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ReviewsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".QuestionsActivity"></activity>
     </application>
 
 </manifest>

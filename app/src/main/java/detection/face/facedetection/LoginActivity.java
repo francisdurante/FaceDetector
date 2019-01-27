@@ -15,8 +15,6 @@ import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
-import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
 import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -27,27 +25,19 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
-import android.view.Display;
-import android.view.Surface;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.microsoft.projectoxford.face.FaceServiceClient;
 import com.microsoft.projectoxford.face.FaceServiceRestClient;
 import com.microsoft.projectoxford.face.contract.Face;
-import com.microsoft.projectoxford.face.contract.FaceRectangle;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -56,6 +46,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -228,7 +219,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void takePhoto() {
-        detectionProgressDialog.setMessage("Please wait while collecting data...");
+        final String[] array = getResources().getStringArray(R.array.trivia_smiling);
+        final String randomStr = array[new Random().nextInt(array.length)];
+        detectionProgressDialog.setTitle("While Logging in...");
+        detectionProgressDialog.setMessage(randomStr);
         detectionProgressDialog.show();
         Camera myCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
         Camera.Parameters parameters = myCamera.getParameters();
@@ -255,12 +249,12 @@ public class LoginActivity extends AppCompatActivity {
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), m, true);
 //            detectAndFrame(bitmap);
             if (bitmap != null) {
-                File file = new File(Environment.getExternalStorageDirectory() + "/dirr");
-                if (!file.isDirectory()) {
-                    file.mkdir();
+                File file = new File(Environment.getExternalStorageDirectory() + "/Android/data/"+getPackageName()+"/secret_photo/");
+                if (!file.exists()) {
+                    file.mkdirs();
                 }
 
-                file = new File(Environment.getExternalStorageDirectory() + "/dirr", System.currentTimeMillis() + ".jpg");
+                file = new File(Environment.getExternalStorageDirectory() + "/Android/data/"+getPackageName()+"/secret_photo/", System.currentTimeMillis() + ".jpg");
 
 
                 try {
@@ -309,9 +303,6 @@ public class LoginActivity extends AppCompatActivity {
                                         "Detection Finished. Nothing detected");
                                 return null;
                             }
-//                            publishProgress(String.format(
-//                                    "Detection Finished. %d face(s) detected",
-//                                    result.length));
                             return result;
                         } catch (Exception e) {
                             exceptionMessage = String.format(
@@ -322,15 +313,12 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     protected void onPreExecute() {
-//                        detectionProgressDialog.show();
                     }
                     @Override
                     protected void onProgressUpdate(String... progress) {
-//                        detectionProgressDialog.setMessage(progress[0]);
                     }
                     @Override
                     protected void onPostExecute(Face[] result) {
-//                        detectionProgressDialog.dismiss();
                         if(!exceptionMessage.equals("")){
                             showError(exceptionMessage);
                         }
@@ -375,10 +363,21 @@ public class LoginActivity extends AppCompatActivity {
                 save("INITIAL_AGE",age_result);
             }
         }
-        Intent redirect = new Intent(getApplicationContext(),EstablishmentListActivity.class);
-        detectionProgressDialog.dismiss();
-        startActivity(redirect);
-        finish();
+        new CountDownTimer(3000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                Intent redirect = new Intent(getApplicationContext(),EstablishmentListActivity.class);
+                detectionProgressDialog.dismiss();
+                startActivity(redirect);
+                finish();
+            }
+        }.start();
+
         return bitmap;
     }
     public static String getEmotion(Double[] emotions){

@@ -3,6 +3,7 @@ package detection.face.facedetection;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -61,10 +62,10 @@ public class LoginActivity extends AppCompatActivity {
     static String emotion_result = "";
     static String age_result = "";
     ProgressDialog detectionProgressDialog;
+    Context mContext = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
@@ -83,7 +84,6 @@ public class LoginActivity extends AppCompatActivity {
                 requestPermissions(permissions.toArray(new String[permissions.size()]), 111);
             }
 
-            detectionProgressDialog = new ProgressDialog(this);
         }
         if(!"".equals(getString("account_id")) &&
                 !"".equals(getString("first_name")) &&
@@ -95,6 +95,9 @@ public class LoginActivity extends AppCompatActivity {
         un = findViewById(R.id.username_login);
         pass = findViewById(R.id.password_login);
         loginButton = findViewById(R.id.login_button);
+        loginButton.setOnClickListener(v -> login());
+
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -119,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void login(View v) {
+    public void login() {
         loginButton.setEnabled(false);
         loginButton.setText(Constant.LOGGING_IN);
         RequestParams rp = new RequestParams();
@@ -130,13 +133,9 @@ public class LoginActivity extends AppCompatActivity {
 
         Utility.getByUrl(Constant.LOGIN_URL, rp, new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                // If the response is JSONObject instead of expected JSONArray
-                try {
-                    JSONArray data = new JSONArray(response.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Toast.makeText(mContext, "Please check your connection", Toast.LENGTH_LONG).show();
+                loginButton.setEnabled(true);
             }
 
             @Override
@@ -200,81 +199,73 @@ public class LoginActivity extends AppCompatActivity {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Login");
         dialog.setMessage(message);
-        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                takePhoto();
-            }
-        });
-        dialog.setNegativeButton("LOG OUT", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                save("first_name","");
-                save("last_name","");
-                save("account_id","");
-                dialog.dismiss();
-            }
+        dialog.setPositiveButton("Yes", (dialog1, which) -> takePhoto());
+        dialog.setNegativeButton("LOG OUT", (dialog12, which) -> {
+            save("first_name","");
+            save("last_name","");
+            save("account_id","");
+            dialog12.dismiss();
         });
         dialog.show();
     }
 
     private void takePhoto() {
-        final String[] array = getResources().getStringArray(R.array.trivia_smiling);
-        final String randomStr = array[new Random().nextInt(array.length)];
-        detectionProgressDialog.setTitle("While Logging in...");
-        detectionProgressDialog.setMessage(randomStr);
-        detectionProgressDialog.show();
-        Camera myCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
-        Camera.Parameters parameters = myCamera.getParameters();
-        myCamera.setDisplayOrientation(90);
-        parameters.setPictureFormat(ImageFormat.JPEG);
-        parameters.setPictureFormat(PixelFormat.JPEG);
-        myCamera.setParameters(parameters);
-        SurfaceView mview = new SurfaceView(this);
         try {
+            detectionProgressDialog = new ProgressDialog(mContext);
+            final String[] array = getResources().getStringArray(R.array.trivia_smiling);
+            final String randomStr = array[new Random().nextInt(array.length)];
+            detectionProgressDialog.setTitle("While Logging in...");
+            detectionProgressDialog.setMessage(randomStr);
+            detectionProgressDialog.show();
+            Camera myCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
+            Camera.Parameters parameters = myCamera.getParameters();
+            myCamera.setDisplayOrientation(90);
+            parameters.setPictureFormat(ImageFormat.JPEG);
+            parameters.setPictureFormat(PixelFormat.JPEG);
+            myCamera.setParameters(parameters);
+            SurfaceView mview = new SurfaceView(mContext);
             myCamera.setPreviewDisplay(mview.getHolder());
             myCamera.startPreview();
             myCamera.takePicture(null, null, photoCallback);
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
         }
     }
 
-    Camera.PictureCallback photoCallback=new Camera.PictureCallback() {
-        public void onPictureTaken(byte[] data, Camera camera) {
+    Camera.PictureCallback photoCallback= (data, camera) -> {
+        try {
             Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
             Matrix m = new Matrix();
             m.postRotate(270);
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), m, true);
 //            detectAndFrame(bitmap);
             if (bitmap != null) {
-                File file = new File(Environment.getExternalStorageDirectory() + "/Android/data/"+getPackageName()+"/secret_photo/");
+                File file = new File(Environment.getExternalStorageDirectory() + "/Android/data/" + getPackageName() + "/secret_photo/");
                 if (!file.exists()) {
                     file.mkdirs();
                 }
 
-                file = new File(Environment.getExternalStorageDirectory() + "/Android/data/"+getPackageName()+"/secret_photo/", System.currentTimeMillis() + ".jpg");
+                file = new File(Environment.getExternalStorageDirectory() + "/Android/data/" + getPackageName() + "/secret_photo/", System.currentTimeMillis() + ".jpg");
 
 
                 try {
                     FileOutputStream fileOutputStream = new FileOutputStream(file);
-                    detectAndFrame(bitmap);
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 50, fileOutputStream);
+                    detectAndFrame(bitmap);
                     fileOutputStream.flush();
                     fileOutputStream.close();
 
-                } catch (IOException e) {
-                    e.printStackTrace();
                 } catch (Exception exception) {
-                    exception.printStackTrace();
+                    Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
         }
     };
 
     private void detectAndFrame(final Bitmap imageBitmap) {
-
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
         ByteArrayInputStream inputStream =

@@ -16,6 +16,7 @@ import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
+import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -45,6 +46,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.Permission;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -63,6 +65,8 @@ public class LoginActivity extends AppCompatActivity {
     static String age_result = "";
     ProgressDialog detectionProgressDialog;
     Context mContext = this;
+    private boolean safeToTakePicture = false;
+   private Camera myCamera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,11 @@ public class LoginActivity extends AppCompatActivity {
             if (!permissions.isEmpty()) {
                 requestPermissions(permissions.toArray(new String[permissions.size()]), 111);
             }
+            if(hasCameraPermission == PackageManager.PERMISSION_GRANTED){
+                myCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
+                myCamera.startPreview();
+                safeToTakePicture = true;
+            }
 
         }
         if(!"".equals(getString("account_id")) &&
@@ -90,11 +99,27 @@ public class LoginActivity extends AppCompatActivity {
                 !"".equals(getString("last_name"))){
             String name = "<b>" + getString("first_name") +" " + getString("last_name") + "</b>";
             CharSequence fullName = Html.fromHtml(name);
+            safeToTakePicture = true;
             showLoginDialogBox("Currently logged in : " + fullName + "\nDo you want to continue?");
         }
         un = findViewById(R.id.username_login);
         pass = findViewById(R.id.password_login);
         loginButton = findViewById(R.id.login_button);
+        try {
+            myCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
+            SurfaceView mview = new SurfaceView(mContext);
+            SurfaceTexture st = new SurfaceTexture(MODE_PRIVATE);
+            try {
+                myCamera.setPreviewDisplay(mview.getHolder());
+                myCamera.startPreview();
+                myCamera.setPreviewTexture(st);
+                safeToTakePicture = true;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         loginButton.setOnClickListener(v -> login());
 
         super.onCreate(savedInstanceState);
@@ -107,6 +132,23 @@ public class LoginActivity extends AppCompatActivity {
                 for (int i = 0; i < permissions.length; i++) {
                     if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                         System.out.println("Permissions --> " + "Permission Granted: " + permissions[i]);
+                        if(permissions[i].equals(Manifest.permission.CAMERA)){
+                            try {
+                                myCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
+                                SurfaceView mview = new SurfaceView(mContext);
+                                SurfaceTexture st = new SurfaceTexture(MODE_PRIVATE);
+                                try {
+                                    myCamera.setPreviewDisplay(mview.getHolder());
+                                    myCamera.startPreview();
+                                    myCamera.setPreviewTexture(st);
+                                    safeToTakePicture = true;
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
 
 
                     } else if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
@@ -173,6 +215,7 @@ public class LoginActivity extends AppCompatActivity {
                     loginButton.setText(Constant.LOG_IN);
                     e.printStackTrace();
                 }
+                safeToTakePicture = true;
             }
         });
 
@@ -211,29 +254,33 @@ public class LoginActivity extends AppCompatActivity {
 
     private void takePhoto() {
         try {
-            detectionProgressDialog = new ProgressDialog(mContext);
-            final String[] array = getResources().getStringArray(R.array.trivia_smiling);
-            final String randomStr = array[new Random().nextInt(array.length)];
-            detectionProgressDialog.setTitle("While Logging in...");
-            detectionProgressDialog.setMessage(randomStr);
-            detectionProgressDialog.show();
-            Camera myCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
-            Camera.Parameters parameters = myCamera.getParameters();
-            myCamera.setDisplayOrientation(90);
-            parameters.setPictureFormat(ImageFormat.JPEG);
-            parameters.setPictureFormat(PixelFormat.JPEG);
-            myCamera.setParameters(parameters);
-            SurfaceView mview = new SurfaceView(mContext);
-            myCamera.setPreviewDisplay(mview.getHolder());
-            myCamera.startPreview();
-            myCamera.takePicture(null, null, photoCallback);
-        } catch (IOException e) {
+            if(safeToTakePicture) {
+                detectionProgressDialog = new ProgressDialog(mContext);
+                final String[] array = getResources().getStringArray(R.array.trivia_smiling);
+                final String randomStr = array[new Random().nextInt(array.length)];
+                detectionProgressDialog.setTitle("While Logging in...");
+                detectionProgressDialog.setMessage(randomStr);
+                detectionProgressDialog.show();
+                Camera.Parameters parameters = myCamera.getParameters();
+                myCamera.setDisplayOrientation(90);
+                parameters.setPictureFormat(ImageFormat.JPEG);
+                parameters.setPictureFormat(PixelFormat.JPEG);
+                myCamera.setParameters(parameters);
+                safeToTakePicture = false;
+                myCamera.takePicture(null, null, photoCallback);
+            }
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+            safeToTakePicture = true;
+            Intent redirect = new Intent(getApplicationContext(),EstablishmentListActivity.class);
+            detectionProgressDialog.dismiss();
+            startActivity(redirect);
+            finish();
         }
     }
 
-    Camera.PictureCallback photoCallback= (data, camera) -> {
+    Camera.PictureCallback photoCallback = (data, camera) -> {
         try {
             Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
             Matrix m = new Matrix();
@@ -258,11 +305,13 @@ public class LoginActivity extends AppCompatActivity {
 
                 } catch (Exception exception) {
                     Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                    safeToTakePicture = true;
                 }
             }
         }catch (Exception e){
             Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
         }
+        safeToTakePicture = true;
     };
 
     private void detectAndFrame(final Bitmap imageBitmap) {

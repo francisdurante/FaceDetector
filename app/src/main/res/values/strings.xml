@@ -22,28 +22,45 @@
         <item>Restaurant</item>
     </string-array>
     <string-array name="questions_sad">
-        <item>Are you happy with yourself?</item>
-        <item>What have you done that you are not proud of?</item>
-        <item>Do you feel excessively guilty over small mistakes?</item>
-        <item>Do you avoid spending time with people you love, because you would rather be alone?</item>
-        <item>Are you very easily irritated?</item>
-        <item>Do you feel empty inside?</item>
-        <item>What promises have you never carried through for yourself?</item>
-        <item>How do you feel today?</item>
-        <item>What scares you about your future?</item>
-        <item>Am I a better person today, than I was yesterday?</item>
-        <item>Do you regret anything?</item>
-        <item>What do you do when you’re feeling lonely?</item>
-        <item>What’s something you strongly dislike/hate?</item>
-        <item>What is one thing you’ve had to forgive yourself for?</item>
+        <item>I dont have fun with other people. </item>
+        <item>I dont have particular sense of meaning in life.</item>
+        <item>I dont feel particularly healthy.</item>
+        <item>I have little interest in pleasure in doing things.</item>
+        <item>I always trouble falling, staying asleep or sleeping too much.</item>
+        <item>Sometimes I am feeling tired or having little of energy.</item>
+        <item>I am feeling bad about myself.</item>
+        <item>My future seems hopeless.</item>
+        <item>I do things slowly.</item>
+        <item>I feel sad.</item>
+        <item>I feel blue.</item>
+        <item>I feel unhappy.</item>
+    </string-array>
+    <string-array name="questions_happy">
+        <item>I feel that life is very rewarding.</item>
+        <item>I am always grateful to the things I have.</item>
+        <item>Life is good.</item>
+        <item>I always laugh a lot.</item>
+        <item>I am intensely interested in other people.</item>
+        <item>I positively affect others.</item>
+        <item>I feel I have a great deal of energy.</item>
+        <item>I am very happy.</item>
+        <item>I feel fully mentally alert.</item>
+        <item>I have very warm feelings towards almost everyone.</item>
     </string-array>
 
     <string-array name="questions_irritate">
-        <item>Things have been bothering me more than they normally do</item>
-        <item>I have been feeling irritable</item>
-        <item>I have been grumpy</item>
-        <item>I have been feeling like I a snap</item>
-        <item>Other people have been getting on my nerves</item>
+        <item>I always feel mad every time I am not comfortable with something or someone.</item>
+        <item>I am a type of person who is easily get annoyed.</item>
+        <item>I have been feeling irritable always.</item>
+        <item>I still get angry when I think of bad things people did to me in the past</item>
+        <item>Waiting in line, or waiting for other people really annoys me.</item>
+        <item>I find it very hard to forgive someone who has done wrong to me.</item>
+        <item>I find it very hard to forgive someone who has done wrong to me.</item>
+        <item>I get angry with myself when I lost control of my emotions.</item>
+        <item>When things dont go my way, I feel annoyed.</item>
+        <item>I am kind of person who is short tempered.</item>
+        <item>I feel like I will have mental breakdown due to stressors.</item>
+        <item>I often like to have an angry outburst.</item>
     </string-array>
 
     <string-array name="trivia">
@@ -98,4 +115,9 @@
     <string name="no_result_found"><b>NO RESULT FOUND</b></string>
     <string name="no_comment"><b>NO COMMENT POSTED</b></string>
     <string name="you_are_agreed_to_answer_this_some_questions">You are agreed to answer this some questions.</string>
+    <string name="strongly_agree">Strongly Agree</string>
+    <string name="agree">Agree</string>
+    <string name="neutral">Neutral</string>
+    <string name="disagree">Disagree</string>
+    <string name="strongly_disagree">Strongly Disagree</string>
 </resources>

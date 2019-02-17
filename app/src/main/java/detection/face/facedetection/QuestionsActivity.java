@@ -210,13 +210,12 @@ public class QuestionsActivity extends AppCompatActivity {
     public int getBiggerResultPage(String[] points){
         int largest = 0;
         for (int x = 1 ; x < 3; x++){
-            System.out.println(points[0] + " " + points[1] + " " + points[2] + " aaaaaaaaaaaaaaaaaaaa");
             if(Double.parseDouble(points[x]) > Double.parseDouble(points[largest])){
                 largest = x;
                 finalResultComputation = points[largest];
             }else{
-                finalResultComputation = points[largest];
-                System.out.println(finalResultComputation + " aaaaaaaaaaaaa");
+                double total = Integer.parseInt(points[largest]) / 4;
+                finalResultComputation = Double.toString(total);
             }
         }
         return largest + 1;

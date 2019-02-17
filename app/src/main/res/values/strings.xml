@@ -107,7 +107,7 @@
     </string-array>
     <!--reference https://www.buzzfeed.com/smiletrain/facts-about-smiles-you-never-knew-->
 
-    <string name="search_face_button">Use Face Recognition</string>
+    <string name="search_face_button">Take Photo</string>
     <string name="re_capture">Re Capture</string>
     <string name="search_main">Search</string>
     <string name="best_suggestion">Best Suggestion</string>

@@ -50,19 +50,16 @@ public class EstablishmentListActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_main, popupMenu.getMenu());
         popupMenu.show();
 
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_logout:
-                        save("account_id","");
-                        save("first_name","");
-                        save("last_name","");
-                        startActivity(new Intent(getApplicationContext(),LoginActivity.class));
-                        break;
-                }
-                return false;
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.action_logout:
+                    save("account_id","");
+                    save("first_name","");
+                    save("last_name","");
+                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                    break;
             }
+            return false;
         });
 
     }
@@ -83,7 +80,9 @@ public class EstablishmentListActivity extends AppCompatActivity {
         mSpinner.setAdapter(mAdapter);
         mSpinner.setOnItemSelectedListener(listener);
         getEstRegistered("","",GlobalVO.getPreferredFood());
-        Utility.popupForQuestions(mContext,this);
+        if(!"1".equals(getString("ANSWERED_SURVEY"))) {
+            Utility.popupForQuestions(mContext, this);
+        }
         Utility.getRandomTrivia(mContext,this);
     }
 
@@ -265,5 +264,10 @@ public class EstablishmentListActivity extends AppCompatActivity {
     }
     public void hideProgressBar(){
         mDialog.dismiss();
+    }
+    public String getString(String key) {
+
+        spf = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return spf.getString(key,"");
     }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:id="@+id/scroll_view_menu_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/linear_view_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15sp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:src="#000"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

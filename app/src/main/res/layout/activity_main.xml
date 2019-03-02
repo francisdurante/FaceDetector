@@ -17,22 +17,22 @@
     <!--<Button android:id="@+id/button1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Captured"/>-->
     <!--<Button android:id="@+id/button2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MAP"/>-->
     <ImageView
-        android:id="@+id/logo_main"
-        android:layout_width="151dp"
-        android:layout_height="109dp"
+        android:id="@+id/imageView"
+        android:layout_width="290dp"
+        android:layout_height="147dp"
+        android:src="@drawable/new_logo"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="115dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="118dp"
-        android:background="@drawable/eateryfinderlogo" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp" />
 
     <ImageView
         android:id="@+id/image_result"
         android:layout_width="243dp"
         android:layout_height="200dp"
-        android:layout_below="@+id/logo_main"
+        android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp" />
 

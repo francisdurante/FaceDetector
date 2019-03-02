@@ -31,6 +31,7 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:hardwareAccelerated="true"
         android:largeHeap="true">
+
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
@@ -81,6 +82,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".QuestionsActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".establishment.ActivityMain" />
+        <activity android:name=".establishment.ActivityLogin"/>
     </application>
 
 </manifest>

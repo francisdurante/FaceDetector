@@ -6,7 +6,7 @@
     <string name="search_button">Search</string>
     <string name="search_text">Search…</string>
     <string name="product_list_label">PRODUCT LIST</string>
-    <string name="show_review"><b>Make Review</b></string>
+    <string name="show_review"><b>Rate this Establishment</b></string>
     <string name="show_review_01"><b>Show Review</b></string>
     <string name="comment_section"><b>REVIEWS</b></string>
     <string-array name="filter">
@@ -120,4 +120,28 @@
     <string name="neutral">Neutral</string>
     <string name="disagree">Disagree</string>
     <string name="strongly_disagree">Strongly Disagree</string>
+
+    <string-array name="emotion_item">
+        <item>HAPPY</item>
+        <item>SAD</item>
+        <item>ANGER</item>
+        <item>CONTEMPT</item>
+        <item>DISGUST</item>
+        <item>FEAR</item>
+        <item>NEUTRAL</item>
+        <item>SURPRISE</item>
+        <item>ALL</item>
+    </string-array>
+
+    <string-array name="age_range">
+        <item>CHILDREN (0 – 14 yrs old)</item>
+        <item>YOUTH (15 – 24 yrs old)</item>
+        <item>ADULT (25 – 59 yrs old)</item>
+        <item>SENIOR (60 and Above yrs old)</item>
+        <item>ALL</item>
+    </string-array>
+    <string-array name="status">
+        <item>ACTIVE</item>
+        <item>INACTIVE</item>
+    </string-array>
 </resources>

@@ -151,13 +151,8 @@ public class Utility {
 
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
         alertDialog.setTitle("Questions");
-        alertDialog.setMessage("We have some questions for you.\nDo you mind answering them?");
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                activity.startActivity(new Intent(context,QuestionsActivity.class));
-            }
-        });
+        alertDialog.setMessage("Please Answer the following questions.");
+        alertDialog.setPositiveButton("YES", (dialog, which) -> activity.startActivity(new Intent(context,QuestionsActivity.class)));
         alertDialog.show();
     }
 

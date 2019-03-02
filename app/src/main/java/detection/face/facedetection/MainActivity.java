@@ -15,12 +15,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -46,6 +43,8 @@ public class MainActivity extends Activity {
     SharedPreferences spf;
     static String emotion_result = "";
     static String age_result = "";
+    static String resultInQuestion;
+    static int questionTrigger = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,9 +53,6 @@ public class MainActivity extends Activity {
         age = findViewById(R.id.age);
         gender = findViewById(R.id.gender);
         smile = findViewById(R.id.smile);
-        //loggedIn = findViewById(R.id.logged_in);
-        //String logged_in = "Logged In : " + getString("first_name") + " " + getString("last_name");
-        //loggedIn.setText(logged_in);
         this.imageView = (ImageView) this.findViewById(R.id.image_result);
         detectionProgressDialog = new ProgressDialog(this);
         if (checkSelfPermission(Manifest.permission.CAMERA)
@@ -66,6 +62,17 @@ public class MainActivity extends Activity {
         } else {
             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, Constant.CAMERA_REQUEST);
+        }
+        questionTrigger = getIntent().getExtras().getInt("QUESTION_TRIGGER");
+        resultInQuestion = getIntent().getExtras().getString("RESULT_QUESTION");
+
+        if(1 == questionTrigger) {
+            Button search = findViewById(R.id.search_main);
+            search.setVisibility(View.GONE);
+            age.setVisibility(View.GONE);
+            gender.setVisibility(View.GONE);
+            smile.setVisibility(View.GONE);
+
         }
     }
 
@@ -153,7 +160,7 @@ public class MainActivity extends Activity {
                         if (result == null) return;
                         ImageView imageView = findViewById(R.id.image_result);
                         imageView.setImageBitmap(
-                                drawFaceRectanglesOnBitmap(imageBitmap, result));
+                                drawFaceRectanglesOnBitmap(imageBitmap, result,mContext));
                         imageBitmap.recycle();
                     }
                 };
@@ -165,14 +172,13 @@ public class MainActivity extends Activity {
         new AlertDialog.Builder(this)
                 .setTitle("Error")
                 .setMessage(message)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }})
+                .setPositiveButton("OK", (dialog, id) -> {
+                })
                 .create().show();
     }
 
-    private static Bitmap drawFaceRectanglesOnBitmap(
-            Bitmap originalBitmap, Face[] faces) {
+    private Bitmap drawFaceRectanglesOnBitmap(
+            Bitmap originalBitmap, Face[] faces,Context context) {
         Bitmap bitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
         Canvas canvas = new Canvas(bitmap);
         Paint paint = new Paint();
@@ -198,11 +204,31 @@ public class MainActivity extends Activity {
                         face.faceAttributes.emotion.fear,
                         face.faceAttributes.emotion.happiness,
                         face.faceAttributes.emotion.neutral,
-                        face.faceAttributes.emotion.sadness,
-                        face.faceAttributes.emotion.surprise};
-                smile.setText("EMOTION : " + getEmotion(emotion));
-                emotion_result = getEmotion(emotion);
-                age_result = getAgeRange(face.faceAttributes.age);
+                        face.faceAttributes.emotion.sadness,};
+                if(questionTrigger != 1) {
+                    smile.setText("EMOTION : " + getEmotion(emotion));
+                    emotion_result = getEmotion(emotion);
+                    age_result = getAgeRange(face.faceAttributes.age);
+                }else {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                    dialog.setTitle("RESULTS");
+                    if (resultInQuestion.equals(getEmotion(emotion))) {
+                        dialog.setMessage("Based in our survey and facial recognition we saw that you are " + resultInQuestion);
+                        dialog.setPositiveButton("OK", (dialog1, which) -> {
+                            dialog1.cancel();
+                            save("ANSWERED_SURVEY","1");
+                        });
+                        dialog.show();
+                    }else {
+                        dialog.setMessage("Based in our survey and facial recognition we saw that you are " + resultInQuestion);
+                        dialog.setPositiveButton("OK", (dialog1, which) -> {
+                            context.startActivity(new Intent(context, EstablishmentListActivity.class));
+                            dialog1.cancel();
+                            ((Activity) context).finish();
+                        });
+                        dialog.show();
+                    }
+                }
             }
         }
         return bitmap;
@@ -235,22 +261,31 @@ public class MainActivity extends Activity {
         for(int x = 1; x < emotions.length; x++){
             if(emotions[x] > emotions[largest]) largest = x;
         }
-        if(largest == 0){
-            emotion = "CONTEMPT";
-        }else if(largest == 1){
-            emotion = "ANGER";
-        }else if(largest == 2){
-            emotion = "DISGUST";
-        }else if(largest == 3){
-            emotion = "FEAR";
-        }else if(largest == 4){
-            emotion = "HAPPY";
-        }else if(largest == 5){
-            emotion = "NEUTRAL";
-        }else if(largest == 6){
-            emotion = "SAD";
+        if(1 != questionTrigger) {
+            if (largest == 0) {
+                emotion = "CONTEMPT";
+            } else if (largest == 1) {
+                emotion = "ANGER";
+            } else if (largest == 2) {
+                emotion = "DISGUST";
+            } else if (largest == 3) {
+                emotion = "FEAR";
+            } else if (largest == 4) {
+                emotion = "HAPPY";
+            } else if (largest == 5) {
+                emotion = "NEUTRAL";
+            } else if (largest == 6) {
+                emotion = "SAD";
+            } else {
+                emotion = "SURPRISE";
+            }
         }else{
-            emotion = "SURPRISE";
+            emotion = "SAD";
+            if(largest == 0){
+                emotion = "IRRITATE";
+            }else if(largest == 1){
+                emotion = "HAPPY";
+            }
         }
         return emotion;
     }

@@ -13,7 +13,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
         android:layout_marginBottom="0dp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,8 +28,10 @@
             android:layout_width="48dp"
             android:layout_height="36dp"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="6dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="27dp"
             android:layout_toEndOf="@+id/search_est_button"
             android:onClick="showPopup"
             android:src="@drawable/iconfinder_profle_1055000" />
@@ -51,10 +53,10 @@
 
         <Button
             android:id="@+id/search_est_button"
-            android:layout_width="wrap_content"
+            android:layout_width="105dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="21dp"
             android:layout_marginTop="14dp"
             android:layout_toEndOf="@+id/search_box"
             android:onClick="searchButton" />
@@ -100,63 +102,64 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/search_face"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:orientation="horizontal"
             android:padding="5sp">
 
             <ImageView
                 android:id="@+id/bakeshop_cat"
                 android:layout_width="100dp"
-                android:scaleType="centerInside"
                 android:layout_height="50dp"
-                android:src="@drawable/bakeshopicon"
-                android:onClick="bakeShopOnlick"/>
+                android:onClick="bakeShopOnlick"
+                android:scaleType="centerInside"
+                android:src="@drawable/bakeshopicon" />
 
             <ImageView
                 android:layout_width="100dp"
-                android:scaleType="centerInside"
                 android:layout_height="50dp"
-                android:src="@drawable/burgericon"
-                android:onClick="burgerShopOnClick" />
+                android:onClick="burgerShopOnClick"
+                android:scaleType="centerInside"
+                android:src="@drawable/burgericon" />
 
             <ImageView
                 android:layout_width="100dp"
-                android:scaleType="centerInside"
                 android:layout_height="50dp"
-                android:src="@drawable/coffeshopicon"
-                android:onClick="coffeeShopOnClick"/>
+                android:onClick="coffeeShopOnClick"
+                android:scaleType="centerInside"
+                android:src="@drawable/coffeshopicon" />
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/category_menu_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/category_menu"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:orientation="horizontal"
             android:padding="5sp">
 
             <ImageView
                 android:id="@+id/bakeshop_cat_1"
                 android:layout_width="100dp"
-                android:scaleType="centerInside"
                 android:layout_height="50dp"
-                android:src="@drawable/icecreamicon"
-                android:onClick="iceCreamShopOnClick" />
+                android:onClick="iceCreamShopOnClick"
+                android:scaleType="centerInside"
+                android:src="@drawable/icecreamicon" />
 
             <ImageView
                 android:layout_width="100dp"
-                android:scaleType="centerInside"
                 android:layout_height="50dp"
-                android:src="@drawable/pizzaicon"
-                android:onClick="pizzaShopOnlick" />
+                android:onClick="pizzaShopOnlick"
+                android:scaleType="centerInside"
+                android:src="@drawable/pizzaicon" />
 
             <ImageView
                 android:layout_width="100dp"
-                android:scaleType="centerInside"
                 android:layout_height="50dp"
-                android:src="@drawable/restauranticon"
-                android:onClick="restaurantOnClick" />
+                android:onClick="restaurantOnClick"
+                android:scaleType="centerInside"
+                android:src="@drawable/restauranticon" />
 
         </LinearLayout>
 

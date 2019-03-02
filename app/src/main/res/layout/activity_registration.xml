@@ -7,6 +7,7 @@
     tools:context=".RegistrationActivity">
 
     <ImageView
+        android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
@@ -15,11 +16,16 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/eateryfinderlogo"
-        android:paddingTop="25sp"/>
+        android:layout_height="147dp"
+        android:src="@drawable/new_logo"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp" />
 
     <EditText
         android:id="@+id/firstname"
@@ -36,7 +42,7 @@
         android:textColorHint="#FFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/repassword"
@@ -141,7 +147,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="5dp"
-        android:text="Prefereed Food"
+        android:text="Proffered Food"
         android:textColor="#FFF"
         android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/preferred_food"

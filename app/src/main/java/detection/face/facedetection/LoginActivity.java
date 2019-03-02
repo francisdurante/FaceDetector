@@ -31,6 +31,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -52,6 +53,7 @@ import java.util.List;
 import java.util.Random;
 
 import cz.msebera.android.httpclient.Header;
+import detection.face.facedetection.establishment.ActivityLogin;
 
 public class LoginActivity extends AppCompatActivity {
     EditText un = null;
@@ -66,7 +68,8 @@ public class LoginActivity extends AppCompatActivity {
     ProgressDialog detectionProgressDialog;
     Context mContext = this;
     private boolean safeToTakePicture = false;
-   private Camera myCamera;
+    private Camera myCamera;
+    TextView establishmentLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,39 +90,42 @@ public class LoginActivity extends AppCompatActivity {
             if (!permissions.isEmpty()) {
                 requestPermissions(permissions.toArray(new String[permissions.size()]), 111);
             }
-            if(hasCameraPermission == PackageManager.PERMISSION_GRANTED){
-                myCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
-                myCamera.startPreview();
-                safeToTakePicture = true;
-            }
+//            if(hasCameraPermission == PackageManager.PERMISSION_GRANTED){
+//                myCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
+//                myCamera.startPreview();
+//                safeToTakePicture = true;
+//            }
 
         }
         if(!"".equals(getString("account_id")) &&
                 !"".equals(getString("first_name")) &&
                 !"".equals(getString("last_name"))){
-            String name = "<b>" + getString("first_name") +" " + getString("last_name") + "</b>";
-            CharSequence fullName = Html.fromHtml(name);
-            safeToTakePicture = true;
-            showLoginDialogBox("Currently logged in : " + fullName + "\nDo you want to continue?");
+            startActivity(new Intent(mContext,EstablishmentListActivity.class));
+            finish();
         }
         un = findViewById(R.id.username_login);
         pass = findViewById(R.id.password_login);
         loginButton = findViewById(R.id.login_button);
-        try {
-            myCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
-            SurfaceView mview = new SurfaceView(mContext);
-            SurfaceTexture st = new SurfaceTexture(MODE_PRIVATE);
-            try {
-                myCamera.setPreviewDisplay(mview.getHolder());
-                myCamera.startPreview();
-                myCamera.setPreviewTexture(st);
-                safeToTakePicture = true;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
+        establishmentLogin = findViewById(R.id.establishment_login);
+//        try {
+//            myCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
+//            SurfaceView mview = new SurfaceView(mContext);
+//            SurfaceTexture st = new SurfaceTexture(MODE_PRIVATE);
+//            try {
+//                myCamera.setPreviewDisplay(mview.getHolder());
+//                myCamera.startPreview();
+//                myCamera.setPreviewTexture(st);
+//                safeToTakePicture = true;
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        establishmentLogin.setOnClickListener(v -> {
+            startActivity(new Intent(mContext,ActivityLogin.class));
+            finish();
+        });
         loginButton.setOnClickListener(v -> login());
 
         super.onCreate(savedInstanceState);
@@ -198,8 +204,11 @@ public class LoginActivity extends AppCompatActivity {
                             save("first_name",GlobalVO.getFirstName());
                             save("last_name",GlobalVO.getLastname());
                             save("account_id",GlobalVO.getAccounId());
-                            Toast.makeText(getApplicationContext(),"Please wait while getting some information",Toast.LENGTH_LONG).show();
-                            takePhoto();
+//                            Toast.makeText(getApplicationContext(),"Please wait while getting some information",Toast.LENGTH_LONG).show();
+//                            takePhoto();
+                            Intent redirect = new Intent(getApplicationContext(),EstablishmentListActivity.class);
+                            startActivity(redirect);
+                            finish();
                         }else{
                             loginButton.setEnabled(true);
                             loginButton.setText(Constant.LOG_IN);

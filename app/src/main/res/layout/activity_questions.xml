@@ -13,15 +13,6 @@
         android:orientation="vertical"
         android:layout_above="@+id/submit_answer"
         android:layout_marginBottom="5sp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/you_are_agreed_to_answer_this_some_questions"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:layout_marginTop="5sp"
-            android:textColor="#FFF"/>
         <ScrollView
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"

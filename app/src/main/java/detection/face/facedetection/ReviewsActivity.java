@@ -139,7 +139,7 @@ public class ReviewsActivity extends AppCompatActivity {
                     JSONObject object = new JSONObject(response.toString());
                     String status = object.getString("status");
                     if ("success".equals(status)) {
-                        Toast.makeText(getApplicationContext(),"Thanks for Rating",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Thank you for rating.",Toast.LENGTH_LONG).show();
                         save("comment_"+est_name,"rated");
                     }
                 } catch (JSONException e) {
@@ -165,7 +165,7 @@ public class ReviewsActivity extends AppCompatActivity {
 
             builder.setTitle("Rate And Comment For " + est_name);
 
-            builder.setMessage("Your rate and comment will help others.");
+            builder.setMessage("Your rate and comment will be posted publicly on the applicaiton. Thank you for your support!");
             final RatingBar rateBar = new RatingBar(getApplicationContext());
             rateBar.setNumStars(5);
             rateBar.setMax(5);

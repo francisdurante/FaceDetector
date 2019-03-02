@@ -91,7 +91,22 @@
             android:layout_marginEnd="43dp"
             android:gravity="center"
             android:onClick="registration"
-            android:text="Not Registered?\nClick Here!"
+            android:text="Not Register\nClick Here!"
+            android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
+        <TextView
+            android:id="@+id/establishment_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/notregister"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="43dp"
+            android:gravity="center"
+            android:onClick="registration"
+            android:text="GO TO ESTABLISHMENT LOGIN"
             android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
     </RelativeLayout>

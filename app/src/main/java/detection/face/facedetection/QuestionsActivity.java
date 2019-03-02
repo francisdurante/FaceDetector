@@ -36,51 +36,17 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
     public void initQuestions() {
-//        int page = 1;
-//        String[] toGetEmotion = getResources().getStringArray(R.array.questions_sad);
-//        if("IRRITATE".equals(Utility.getString("INITIAL_EMOTION",mContext))){
-//            toGetEmotion = getResources().getStringArray(R.array.questions_irritate);
-//        }
-//
-//        LayoutInflater inflater = LayoutInflater.from(mContext);
-//        LinearLayout linearToPalceQuestions = findViewById(R.id.questions_place);
-//        for(int x = 0; x < 4; x++){
-//            try {
-//                int position = new Random().nextInt(toGetEmotion.length);
-//                final String randomStr = toGetEmotion[position];
-//                View view = inflater.inflate(R.layout.questions_place_layoutt, linearToPalceQuestions, false);
-//                final TextView question = view.findViewById(R.id.questions);
-//                question.setText((x + 1) + ". " + randomStr);
-//                String questionsShown = question.getText().toString();
-//                question.setTag(x + 1);
-//                save("QUESTION_SHOWN_" + question.getTag(), questionsShown, mContext);
-//                radioGroup = view.findViewById(R.id.radio_group);
-//                radioGroup.setTag(x + 1);
-//                radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//                    @Override
-//                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                        String value = ((RadioButton) findViewById(group.getCheckedRadioButtonId())).getText().toString();
-//                        save("ANSWER_QUESTION_" + group.getTag().toString(), value, mContext);
-//                    }
-//
-//                });
-//                linearToPalceQuestions.addView(view);
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
-//        }
         questionToDisplay(page);
+        new SecretCapture(mContext).execute();
     }
     public void getAnswers(){
         String[] results = new String[3];
-        Toast.makeText(mContext,"Thank you for your cooperation",Toast.LENGTH_LONG).show();
         int points;
         for (int page = 0; page < 3; page++) {
             points = 0;
             for (int x = 0; x < 4; x++) {
                 String position = Integer.toString(x + 1);
                 String pageNumber = Integer.toString(page + 1);
-                System.out.println(getString("ANSWER_QUESTION_" + pageNumber + "_" + position, mContext) + " aaaaaaaaaaaaa");
                 switch (getString("ANSWER_QUESTION_" + pageNumber + "_" + position, mContext)){
                     case "Strongly Agree" :
                         points = points + 5;
@@ -116,11 +82,14 @@ public class QuestionsActivity extends AppCompatActivity {
         }
 
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
-        dialog.setTitle("Result in your Answers");
-        dialog.setMessage("Base in our survey we saw that you are " + finalResultEmotion + " with total points of " + finalResultComputation);
-        dialog.setPositiveButton("OK", (dialog1, which) -> onBackPressed());
-        dialog.show();
+//        AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
+//        dialog.setTitle("Result in your Answers");
+//        dialog.setMessage("Base in our survey we saw that you are " + finalResultEmotion + " with total points of " + finalResultComputation);
+//        dialog.setPositiveButton("OK", (dialog1, which) -> onBackPressed());
+//        dialog.show();
+        Toast.makeText(mContext,"Please Use Facial Recognition",Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(mContext,MainActivity.class).putExtra("RESULT_QUESTION",finalResultEmotion).putExtra("QUESTION_TRIGGER",1));
+        finish();
     }
 
     @Override
@@ -150,10 +119,12 @@ public class QuestionsActivity extends AppCompatActivity {
             toGetEmotion = getResources().getStringArray(R.array.questions_happy);
             next.setText("NEXT");
             next.setOnClickListener(v -> {
+                new SecretCapture(mContext).execute();
                 if(radioGroup.getCheckedRadioButtonId() == -1){
                     Toast.makeText(mContext,"Please complete the survey",Toast.LENGTH_SHORT).show();
                 }else{
                     questionToDisplay(2);
+                    new SecretCapture(mContext).execute();
                 }
             });
 
@@ -190,7 +161,12 @@ public class QuestionsActivity extends AppCompatActivity {
                 final String randomStr = toGetEmotion[position];
                 View view = inflater.inflate(R.layout.questions_place_layoutt, linearToPalceQuestions, false);
                 final TextView question = view.findViewById(R.id.questions);
-                question.setText((x + 1) + ". " + randomStr);
+                if(page == 1)
+                    question.setText((x + 1) + ". " + randomStr);
+                if(page == 2)
+                    question.setText((x + 5) + ". " + randomStr);
+                if(page == 3)
+                    question.setText((x + 9) + ". " + randomStr);
                 String questionsShown = question.getText().toString();
                 question.setTag(x + 1);
                 save("QUESTION_SHOWN_" + question.getTag(), questionsShown, mContext);

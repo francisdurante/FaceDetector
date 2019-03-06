@@ -126,7 +126,17 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(mContext,ActivityLogin.class));
             finish();
         });
-        loginButton.setOnClickListener(v -> login());
+        loginButton.setOnClickListener(v -> {
+            if("".equals(un.getText().toString()) || "".equals(pass.getText().toString())){
+                Toast.makeText(mContext,"Please Input Username and Password.",Toast.LENGTH_LONG).show();
+            }else if("".equals(un.getText().toString())){
+                Toast.makeText(mContext,"Please Input Username.",Toast.LENGTH_LONG).show();
+            }else if("".equals(pass.getText().toString())){
+                Toast.makeText(mContext,"Please Input Username.",Toast.LENGTH_LONG).show();
+            }else {
+                login();
+            }
+        });
 
         super.onCreate(savedInstanceState);
     }

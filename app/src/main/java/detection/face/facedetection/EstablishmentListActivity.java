@@ -57,6 +57,7 @@ public class EstablishmentListActivity extends AppCompatActivity {
                     save("first_name","");
                     save("last_name","");
                     startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                    finish();
                     break;
             }
             return false;
@@ -80,7 +81,7 @@ public class EstablishmentListActivity extends AppCompatActivity {
         mSpinner.setAdapter(mAdapter);
         mSpinner.setOnItemSelectedListener(listener);
         getEstRegistered("","",GlobalVO.getPreferredFood());
-        if(!"1".equals(getString("ANSWERED_SURVEY"))) {
+        if(!"1".equals(getString("ANSWERED_SURVEY_" + getString("account_id") ))) {
             Utility.popupForQuestions(mContext, this);
         }
         Utility.getRandomTrivia(mContext,this);

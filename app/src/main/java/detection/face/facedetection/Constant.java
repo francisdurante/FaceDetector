@@ -18,7 +18,7 @@ public class Constant {
     static final String REGISTRATION_SUCCESS = "Registration Success";
     static final String LOGIN_SUCCESS = "Login Success";
     static final String INACTIVE_USER = "User is InActive";
-    static final String LOGIN_FAIL = "Login Fail";
+    static final String LOGIN_FAIL = "Your username and password is not registered";
     static final String LOADING = "Loading...";
     static final String SEARCH = "SEARCH";
     static final int CAMERA_REQUEST = 1888;

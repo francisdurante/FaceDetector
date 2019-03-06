@@ -110,4 +110,18 @@
             android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
     </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15sp"
+        android:gravity="end">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#00ffffff"
+            android:src="@drawable/ic_arrow_point_to_right"
+            android:paddingEnd="15sp"
+            />
+    </LinearLayout>
 </RelativeLayout>

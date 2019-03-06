@@ -213,17 +213,18 @@ public class MainActivity extends Activity {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(context);
                     dialog.setTitle("RESULTS");
                     if (resultInQuestion.equals(getEmotion(emotion))) {
-                        dialog.setMessage("Based in our survey and facial recognition we saw that you are " + resultInQuestion);
+                        dialog.setMessage("Based in our question and capture image you are " + face.faceAttributes.gender + " with age of " + getAgeRange(face.faceAttributes.age) + " and you are a " + resultInQuestion);
                         dialog.setPositiveButton("OK", (dialog1, which) -> {
                             dialog1.cancel();
-                            save("ANSWERED_SURVEY","1");
+                            save("ANSWERED_SURVEY_" + getString("account_id"),"1");
                         });
                         dialog.show();
                     }else {
-                        dialog.setMessage("Based in our survey and facial recognition we saw that you are " + resultInQuestion);
+                        dialog.setMessage("Based in our question and capture image you are " + face.faceAttributes.gender + " with age of " + getAgeRange(face.faceAttributes.age) + " and you are a " + resultInQuestion);
                         dialog.setPositiveButton("OK", (dialog1, which) -> {
                             context.startActivity(new Intent(context, EstablishmentListActivity.class));
                             dialog1.cancel();
+                            save("ANSWERED_SURVEY_" + getString("account_id") ,"1");
                             ((Activity) context).finish();
                         });
                         dialog.show();

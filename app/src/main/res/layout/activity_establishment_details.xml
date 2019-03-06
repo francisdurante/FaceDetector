@@ -69,7 +69,7 @@
             android:gravity="center"
             android:onClick="showReviews"
             android:text="@string/show_review_01"
-            android:textColor="#000"
+            android:textColor="#FFF"
             android:textSize="15sp"
             android:layout_marginBottom="5dp"/>
 

@@ -152,7 +152,7 @@ public class Utility {
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
         alertDialog.setTitle("Questions");
         alertDialog.setMessage("Please Answer the following questions.");
-        alertDialog.setPositiveButton("YES", (dialog, which) -> activity.startActivity(new Intent(context,QuestionsActivity.class)));
+        alertDialog.setPositiveButton("OK", (dialog, which) -> activity.startActivity(new Intent(context,QuestionsActivity.class)));
         alertDialog.show();
     }
 

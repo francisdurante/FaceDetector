@@ -28,10 +28,8 @@
             android:layout_width="48dp"
             android:layout_height="36dp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="27dp"
             android:layout_toEndOf="@+id/search_est_button"
             android:onClick="showPopup"
             android:src="@drawable/iconfinder_profle_1055000" />
@@ -53,12 +51,14 @@
 
         <Button
             android:id="@+id/search_est_button"
-            android:layout_width="105dp"
+            android:layout_width="24dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginStart="21dp"
             android:layout_marginTop="14dp"
             android:layout_toEndOf="@+id/search_box"
+            android:background="#00ffffff"
+            android:drawableLeft="@drawable/ic_magnifier_tool"
             android:onClick="searchButton" />
 
         <TextView

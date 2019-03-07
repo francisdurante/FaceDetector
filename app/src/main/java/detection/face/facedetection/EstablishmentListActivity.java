@@ -1,7 +1,9 @@
 package detection.face.facedetection;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -53,11 +55,19 @@ public class EstablishmentListActivity extends AppCompatActivity {
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.action_logout:
-                    save("account_id","");
-                    save("first_name","");
-                    save("last_name","");
-                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
-                    finish();
+                   new AlertDialog.Builder(mContext)
+                            .setPositiveButton("YES", (dialog, which) -> {
+                                save("account_id","");
+                                save("first_name","");
+                                save("last_name","");
+                                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                                finish();
+                            })
+                            .setMessage("Are you sure you want to log out?")
+                            .setTitle("Log out")
+                            .setNegativeButton("NO",((dialog, which) -> {
+                               dialog.dismiss();
+                            })).show();
                     break;
             }
             return false;
@@ -74,7 +84,7 @@ public class EstablishmentListActivity extends AppCompatActivity {
         searchKey = findViewById(R.id.search_box);
         searchButton = findViewById(R.id.search_est_button);
         mSpinner = findViewById(R.id.filter);
-        searchButton.setText(Constant.SEARCH);
+//        searchButton.setText(Constant.SEARCH);
         ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.filter));
         mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -97,7 +107,7 @@ public class EstablishmentListActivity extends AppCompatActivity {
         }if(!"".equals(food)){
             rp.add("food",food);
         }
-        searchButton.setText(Constant.LOADING);
+//        searchButton.setText(Constant.LOADING);
         searchButton.setEnabled(false);
         showProgressBar();
         Utility.getByUrl(Constant.GET_REGISTERED_EST, rp, new JsonHttpResponseHandler() {
@@ -121,6 +131,7 @@ public class EstablishmentListActivity extends AppCompatActivity {
                                 imageView.setPadding(20, 10, 10, 20);
                                 Picasso.with(getApplicationContext())
                                         .load(picUrl(datas.getString("est_front_store")))
+                                        .error(R.drawable.default_image_thumbnail)
                                         .into(imageView);
                                 imageView.setOnClickListener(new ClickEstablishment(datas.getString("establishment_name"), datas.getString("establishment_user_id"),String.format("%.1f", datas.getDouble("rate")),datas.getString("address")));
 
@@ -148,11 +159,11 @@ public class EstablishmentListActivity extends AppCompatActivity {
 
                                 scrollView.addView(view);
                             }
-                            searchButton.setText(Constant.SEARCH);
+//                            searchButton.setText(Constant.SEARCH);
                             searchButton.setEnabled(true);
                         }
                     }else{
-                        searchButton.setText(Constant.SEARCH);
+//                        searchButton.setText(Constant.SEARCH);
                         searchButton.setEnabled(true);
                     }
                 } catch (JSONException e) {
@@ -166,11 +177,14 @@ public class EstablishmentListActivity extends AppCompatActivity {
     }
     public String picUrl(String path){
         String[] pic = path.split("/");
-        return Constant.PUBLIC_IMAGE_PATH + pic[7];
+        try {
+            return Constant.PUBLIC_IMAGE_PATH + pic[7];
+        }catch(Exception ignore){
+            return Constant.PUBLIC_IMAGE_PATH + pic[0];
+        }
     }
     public class ClickEstablishment implements View.OnClickListener
     {
-
         String estName;
         String id;
         String rate;

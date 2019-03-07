@@ -94,20 +94,6 @@
             android:text="Not Register\nClick Here!"
             android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
-        <TextView
-            android:id="@+id/establishment_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/notregister"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="43dp"
-            android:gravity="center"
-            android:onClick="registration"
-            android:text="GO TO ESTABLISHMENT LOGIN"
-            android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
     </RelativeLayout>
     <LinearLayout
@@ -115,7 +101,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="15sp"
-        android:gravity="end">
+        android:gravity="end"
+        android:orientation="vertical">
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -123,5 +110,17 @@
             android:src="@drawable/ic_arrow_point_to_right"
             android:paddingEnd="15sp"
             />
+        <TextView
+            android:id="@+id/establishment_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/notregister"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:onClick="registration"
+            android:text="GO TO ESTABLISHMENT LOGIN"
+            android:textColor="@color/common_google_signin_btn_text_dark_default" />
     </LinearLayout>
 </RelativeLayout>

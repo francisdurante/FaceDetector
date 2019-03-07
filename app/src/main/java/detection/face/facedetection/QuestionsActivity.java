@@ -18,6 +18,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class QuestionsActivity extends AppCompatActivity {
@@ -28,6 +29,7 @@ public class QuestionsActivity extends AppCompatActivity {
     int page = 1;
     String finalResultComputation = "";
     String finalResultEmotion = "";
+    private ArrayList lastPosition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,6 +115,7 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
     private void questionToDisplay(int page){
+        lastPosition = new ArrayList(4);
         String[] toGetEmotion = null;
         next = findViewById(R.id.submit_answer);
         if(page == 1){
@@ -155,10 +158,19 @@ public class QuestionsActivity extends AppCompatActivity {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         LinearLayout linearToPalceQuestions = findViewById(R.id.questions_place);
         linearToPalceQuestions.removeAllViews();
+        System.out.println(lastPosition.size() + " aaaaaaaaaaaaaaaaaaaaaaa ");
+        for (int x = 0; x < 4; x++) {
+            int position = new Random().nextInt(toGetEmotion.length);
+            System.out.println(position + " aaaaaaaaaaaaaaaaaa");
+            if(!lastPosition.contains(position)) {
+                lastPosition.add(position);
+            }else{
+                --x;
+            }
+        }
         for(int x = 0; x < 4; x++){
             try {
-                int position = new Random().nextInt(toGetEmotion.length);
-                final String randomStr = toGetEmotion[position];
+                final String randomStr = toGetEmotion[(int)lastPosition.get(x)];
                 View view = inflater.inflate(R.layout.questions_place_layoutt, linearToPalceQuestions, false);
                 final TextView question = view.findViewById(R.id.questions);
                 if(page == 1)

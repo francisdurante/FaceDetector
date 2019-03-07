@@ -14,12 +14,10 @@
         <item>Food</item>
     </string-array>
     <string-array name="preferred_food">
-        <item>Dessert</item>
         <item>Burger</item>
         <item>Coffee</item>
         <item>Ice Cream</item>
         <item>Pizza</item>
-        <item>Restaurant</item>
     </string-array>
     <string-array name="questions_sad">
         <item>I dont have fun with other people. </item>
@@ -124,12 +122,7 @@
     <string-array name="emotion_item">
         <item>HAPPY</item>
         <item>SAD</item>
-        <item>ANGER</item>
-        <item>CONTEMPT</item>
-        <item>DISGUST</item>
-        <item>FEAR</item>
-        <item>NEUTRAL</item>
-        <item>SURPRISE</item>
+        <item>IRRITATE</item>
         <item>ALL</item>
     </string-array>
 

@@ -114,12 +114,18 @@ public class SecretCapture extends AsyncTask<Void, Void, Void> {
                     fileOutputStream.close();
 
                 } catch (Exception exception) {
+                    myCamera.release();
+                    myCamera = null;
                     safeToTakePicture = true;
                 }
             }
         }catch (Exception e){
+            myCamera.release();
+            myCamera = null;
             safeToTakePicture = true;
         }
+        myCamera.release();
+        myCamera = null;
         safeToTakePicture = true;
     };
 

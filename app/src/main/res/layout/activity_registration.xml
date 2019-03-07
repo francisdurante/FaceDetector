@@ -13,26 +13,50 @@
         android:scaleType="centerCrop"
         android:src="@drawable/background_image"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="37dp" />
 
+<LinearLayout
+    android:id="@+id/linear_top"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="147dp"
         android:src="@drawable/new_logo"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp" />
 
-    <EditText
+        <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_top">
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+        android:id="@+id/firstname_label"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="First Name"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/firstname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <EditText
         android:id="@+id/firstname"
         android:layout_width="280dp"
         android:layout_height="41dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="15dp"
+        android:layout_below="@+id/firstname_label"
+        android:layout_marginStart="0dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="#FFF"
         android:ems="10"
@@ -41,31 +65,49 @@
         android:textColor="#FFFFFF"
         android:textColorHint="#FFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
-    <EditText
-        android:id="@+id/repassword"
+        <TextView
+        android:id="@+id/lastName_label"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="Last Name"
+        android:layout_marginEnd="8dp"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstname" />
+
+        <EditText
+        android:id="@+id/lastname"
         android:layout_width="280dp"
         android:layout_height="41dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="0dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="#FFF"
         android:ems="10"
-        android:hint="Re-Type Password"
-        android:inputType="textPassword"
+        android:hint="Last Name"
+        android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/lastName_label" />
 
-    <EditText
+        <TextView
+        android:id="@+id/username_label"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:layout_marginEnd="8dp"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lastname" />
+
+        <EditText
         android:id="@+id/username"
         android:layout_width="280dp"
         android:layout_height="41dp"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="#FFF"
         android:ems="10"
@@ -77,11 +119,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lastname" />
 
-    <EditText
+        <TextView
+        android:id="@+id/email_label"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="Email Address"
+        android:layout_marginEnd="8dp"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
+
+        <EditText
         android:id="@+id/email"
         android:layout_width="280dp"
         android:layout_height="41dp"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="#FFF"
         android:ems="10"
@@ -93,27 +146,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
-    <EditText
-        android:id="@+id/age"
+        <TextView
+        android:id="@+id/password_label"
         android:layout_width="280dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="wrap_content"
+        android:text="Password"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="#FFF"
-        android:ems="10"
-        android:hint="Age"
-        android:inputType="number"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFF"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
-    <EditText
+        <EditText
         android:id="@+id/password"
         android:layout_width="280dp"
         android:layout_height="41dp"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="#FFF"
         android:ems="10"
@@ -125,48 +172,83 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/age" />
 
-    <EditText
-        android:id="@+id/lastname"
+        <TextView
+        android:id="@+id/repassword_label"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="Re-Type Password"
+        android:layout_marginEnd="8dp"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
+
+        <EditText
+        android:id="@+id/repassword"
         android:layout_width="280dp"
         android:layout_height="41dp"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="#FFF"
         android:ems="10"
-        android:hint="Last Name"
-        android:inputType="textPersonName"
+        android:hint="Re-Type Password"
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lastName_label" />
+
+        <TextView
+        android:id="@+id/age_label"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="Re-Type Password"
+        android:layout_marginEnd="8dp"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/repassword_label" />
+
+        <EditText
+        android:id="@+id/age"
+        android:layout_width="280dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#FFF"
+        android:ems="10"
+        android:hint="Age"
+        android:inputType="number"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstname" />
+        app:layout_constraintTop_toBottomOf="@+id/email" />
 
-    <TextView
-        android:layout_width="wrap_content"
+
+        <TextView
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="5dp"
-        android:text="Proffered Food"
+        android:text="Preffered Food"
+        app:layout_constraintEnd_toEndOf="parent"
         android:textColor="#FFF"
         android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@+id/preferred_food"
-        app:layout_constraintHorizontal_bias="0.959"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/repassword" />
+        app:layout_constraintTop_toBottomOf="@+id/email" />
 
-    <Spinner
+        <Spinner
         android:id="@+id/preferred_food"
         android:layout_width="180dp"
         android:layout_height="42dp"
-        android:layout_below="@+id/repassword"
         android:layout_marginEnd="48dp"
         android:hint="#FFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/repassword" />
+        app:layout_constraintTop_toBottomOf="@+id/age" />
 
 
-    <Button
+        <Button
         android:id="@+id/register"
         android:layout_width="286dp"
         android:layout_height="46dp"
@@ -180,5 +262,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/preferred_food" />
+        </LinearLayout>
+        </ScrollView>
 
+</LinearLayout>
 </android.support.constraint.ConstraintLayout>

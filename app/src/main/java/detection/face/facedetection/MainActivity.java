@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
         if(1 == questionTrigger) {
             Button search = findViewById(R.id.search_main);
             search.setVisibility(View.GONE);
-            age.setVisibility(View.GONE);
+            age.setVisibility(View.VISIBLE);
             gender.setVisibility(View.GONE);
             smile.setVisibility(View.GONE);
 
@@ -210,25 +210,7 @@ public class MainActivity extends Activity {
                     emotion_result = getEmotion(emotion);
                     age_result = getAgeRange(face.faceAttributes.age);
                 }else {
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-                    dialog.setTitle("RESULTS");
-                    if (resultInQuestion.equals(getEmotion(emotion))) {
-                        dialog.setMessage("Based in our question and capture image you are " + face.faceAttributes.gender + " with age of " + getAgeRange(face.faceAttributes.age) + " and you are a " + resultInQuestion);
-                        dialog.setPositiveButton("OK", (dialog1, which) -> {
-                            dialog1.cancel();
-                            save("ANSWERED_SURVEY_" + getString("account_id"),"1");
-                        });
-                        dialog.show();
-                    }else {
-                        dialog.setMessage("Based in our question and capture image you are " + face.faceAttributes.gender + " with age of " + getAgeRange(face.faceAttributes.age) + " and you are a " + resultInQuestion);
-                        dialog.setPositiveButton("OK", (dialog1, which) -> {
-                            context.startActivity(new Intent(context, EstablishmentListActivity.class));
-                            dialog1.cancel();
-                            save("ANSWERED_SURVEY_" + getString("account_id") ,"1");
-                            ((Activity) context).finish();
-                        });
-                        dialog.show();
-                    }
+                    age.setText("Based in our question and capture image you are " + face.faceAttributes.gender + " with age of " + getAgeRange(face.faceAttributes.age) + " and you are a " + resultInQuestion);
                 }
             }
         }

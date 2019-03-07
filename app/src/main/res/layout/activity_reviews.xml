@@ -17,7 +17,7 @@
         android:paddingStart="30sp"
         android:paddingEnd="30sp"
         android:textColor="#FFF"
-        android:drawableBottom="@drawable/iconfinder_icon_23_star_3147551"/>
+        android:drawableBottom="@drawable/ic_star"/>
 
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_toEndOf="@+id/rating"
         android:text="Phim Phimz Sizzling"
         android:textColor="#FFF"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/est_address_rating"
@@ -42,23 +42,25 @@
         android:layout_toEndOf="@+id/rating"
         android:text="Phim Phimz Sizzling"
         android:textColor="#FFF"
-        android:textSize="14sp" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/rate_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/est_address_rating"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="9dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="24dp"
         android:layout_toEndOf="@+id/rating"
         android:background="@drawable/rounded_button"
-        android:onClick="rateMeLinkOnClick"
         android:gravity="center"
-        android:padding="10dp"
+        android:onClick="rateMeLinkOnClick"
+        android:padding="5dp"
         android:text="@string/show_review"
         android:textColor="#FFF"
-        android:textSize="15sp" />
+        android:textSize="10sp" />
 
     <TextView
         android:id="@+id/comment_section_rating"
@@ -66,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/rating"
         android:layout_alignParentStart="false"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="@string/comment_section"
         android:textColor="#FFF"

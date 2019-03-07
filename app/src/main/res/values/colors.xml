@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#fe15af29</color>
     <color name="colorAccent">#D81B60</color>
     <color name="my_spinner_text_color">#FFF</color>
+    <color name="black">#100205</color>
+    <color name="yellow">#e1de29</color>
 </resources>

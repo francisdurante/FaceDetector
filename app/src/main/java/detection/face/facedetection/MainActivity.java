@@ -39,6 +39,7 @@ public class MainActivity extends Activity {
     static TextView age;
     static TextView gender;
     static TextView smile;
+    TextView resultSurvey;
     Context mContext = this;
     SharedPreferences spf;
     static String emotion_result = "";
@@ -65,13 +66,12 @@ public class MainActivity extends Activity {
         }
         questionTrigger = getIntent().getExtras().getInt("QUESTION_TRIGGER");
         resultInQuestion = getIntent().getExtras().getString("RESULT_QUESTION");
-
         if(1 == questionTrigger) {
-            Button search = findViewById(R.id.search_main);
-            search.setVisibility(View.GONE);
-            age.setVisibility(View.VISIBLE);
-            gender.setVisibility(View.GONE);
-            smile.setVisibility(View.GONE);
+            save("ANSWERED_SURVEY_" + getString("account_id"),"1");
+            resultSurvey = findViewById(R.id.result_survey);
+//            age.setVisibility(View.GONE);
+//            gender.setVisibility(View.GONE);
+//            smile.setVisibility(View.GONE);
 
         }
     }
@@ -198,19 +198,18 @@ public class MainActivity extends Activity {
 
                 gender.setText("GENDER: " + face.faceAttributes.gender);
                 age.setText("AGE: " + getAgeRange(face.faceAttributes.age));
-                Double[] emotion = {face.faceAttributes.emotion.contempt,
-                        face.faceAttributes.emotion.anger,
-                        face.faceAttributes.emotion.disgust,
-                        face.faceAttributes.emotion.fear,
+                Double[] emotion = {face.faceAttributes.emotion.anger,
                         face.faceAttributes.emotion.happiness,
-                        face.faceAttributes.emotion.neutral,
                         face.faceAttributes.emotion.sadness,};
                 if(questionTrigger != 1) {
                     smile.setText("EMOTION : " + getEmotion(emotion));
                     emotion_result = getEmotion(emotion);
                     age_result = getAgeRange(face.faceAttributes.age);
                 }else {
-                    age.setText("Based in our question and capture image you are " + face.faceAttributes.gender + " with age of " + getAgeRange(face.faceAttributes.age) + " and you are a " + resultInQuestion);
+                    smile.setText("");
+                    age.setText("");
+                    gender.setText("");
+                    resultSurvey.setText("Based in our question and capture image you are " + face.faceAttributes.gender + " with age of " + getAgeRange(face.faceAttributes.age) + " and you are a " + getEmotion(emotion));
                 }
             }
         }
@@ -245,22 +244,11 @@ public class MainActivity extends Activity {
             if(emotions[x] > emotions[largest]) largest = x;
         }
         if(1 != questionTrigger) {
-            if (largest == 0) {
-                emotion = "CONTEMPT";
-            } else if (largest == 1) {
-                emotion = "ANGER";
-            } else if (largest == 2) {
-                emotion = "DISGUST";
-            } else if (largest == 3) {
-                emotion = "FEAR";
-            } else if (largest == 4) {
+            emotion = "SAD";
+            if(largest == 0){
+                emotion = "IRRITATE";
+            }else if(largest == 1){
                 emotion = "HAPPY";
-            } else if (largest == 5) {
-                emotion = "NEUTRAL";
-            } else if (largest == 6) {
-                emotion = "SAD";
-            } else {
-                emotion = "SURPRISE";
             }
         }else{
             emotion = "SAD";

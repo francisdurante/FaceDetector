@@ -24,16 +24,11 @@
         android:layout_marginTop="0dp">
 
 
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="36dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="15dp"
-            android:layout_toEndOf="@+id/search_est_button"
-            android:onClick="showPopup"
-            android:src="@drawable/iconfinder_profle_1055000" />
-
+        <LinearLayout
+            android:id="@+id/linear_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
         <EditText
             android:id="@+id/search_box"
             android:layout_width="133dp"
@@ -53,19 +48,32 @@
             android:id="@+id/search_est_button"
             android:layout_width="24dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="21dp"
+            android:layout_marginStart="5sp"
             android:layout_marginTop="14dp"
-            android:layout_toEndOf="@+id/search_box"
             android:background="#00ffffff"
-            android:drawableLeft="@drawable/ic_magnifier_tool"
+            android:drawableStart="@drawable/ic_magnifier_tool"
             android:onClick="searchButton" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_marginEnd="20sp">
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="36dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                android:onClick="showPopup"
+                android:src="@drawable/iconfinder_profle_1055000" />
+    </LinearLayout>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/filter_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/search_box"
+            android:layout_below="@+id/linear_top"
             android:layout_alignParentStart="true"
             android:layout_marginStart="31dp"
             android:layout_marginTop="0dp"
@@ -77,14 +85,14 @@
             android:id="@+id/filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/search_box"
+            android:layout_below="@+id/linear_top"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="-7dp"
+            android:layout_marginTop="-8dp"
             android:layout_toEndOf="@+id/filter_label" />
 
         <Button
             android:id="@+id/search_face"
-            android:layout_width="353dp"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_below="@+id/filter_label"
             android:layout_alignParentStart="true"

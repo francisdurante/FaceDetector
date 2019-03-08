@@ -31,6 +31,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -69,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
     Context mContext = this;
     private boolean safeToTakePicture = false;
     private Camera myCamera;
-    TextView establishmentLogin;
+    ImageButton establishmentLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
         un = findViewById(R.id.username_login);
         pass = findViewById(R.id.password_login);
         loginButton = findViewById(R.id.login_button);
-        establishmentLogin = findViewById(R.id.establishment_login);
+        establishmentLogin = findViewById(R.id.establishment_login_button);
 //        try {
 //            myCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
 //            SurfaceView mview = new SurfaceView(mContext);

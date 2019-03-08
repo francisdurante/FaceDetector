@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import detection.face.facedetection.LoginActivity;
 import detection.face.facedetection.R;
 import detection.face.facedetection.establishment.login.LoginDAO;
 import detection.face.facedetection.establishment.login.LoginVO;
@@ -132,4 +133,10 @@ public class ActivityLogin extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(mContext, LoginActivity.class));
+        finish();
+        super.onBackPressed();
+    }
 }

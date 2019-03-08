@@ -32,6 +32,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import cz.msebera.android.httpclient.Header;
 
 public class EstablishmentListActivity extends AppCompatActivity {
@@ -46,6 +48,8 @@ public class EstablishmentListActivity extends AppCompatActivity {
     PopupMenu popupMenu;
     ProgressDialog mDialog;
     LinearLayout questionLinear;
+    ArrayList<String> estNameDisplay;
+
     public void showPopup(View v) {
         popupMenu = new PopupMenu(this, v);
         MenuInflater inflater = popupMenu.getMenuInflater();
@@ -114,6 +118,8 @@ public class EstablishmentListActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
+                    boolean duplicate;
+                    estNameDisplay = new ArrayList<String>();
                     scrollView = findViewById(R.id.list);
                     LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
                     JSONObject object = new JSONObject(response.toString());
@@ -124,8 +130,14 @@ public class EstablishmentListActivity extends AppCompatActivity {
                         for (int x = 0; x < lenght; x++) {
                             String array = data.getString(x);
                             JSONObject datas = new JSONObject(array);
+                            if(x != 0 && estNameDisplay.contains(datas.getString("establishment_name"))){
+                                duplicate = true;
+                            }else {
+                                estNameDisplay.add(datas.getString("establishment_name"));
+                                duplicate = false;
+                            }
                             int estStatus = datas.getInt("est_status");
-                            if (estStatus == 1) {
+                            if (estStatus == 1 && !duplicate) {
                                 View view = inflater.inflate(R.layout.est_list_item, scrollView, false);
                                 ImageView imageView = view.findViewById(R.id.est_pic);
                                 imageView.setPadding(20, 10, 10, 20);

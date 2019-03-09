@@ -209,7 +209,7 @@ public class MainActivity extends Activity {
                     smile.setText("");
                     age.setText("");
                     gender.setText("");
-                    resultSurvey.setText("Based in our question and capture image you are " + face.faceAttributes.gender + " with age of " + getAgeRange(face.faceAttributes.age) + " and you are a " + getEmotion(emotion));
+                    resultSurvey.setText("Based in our question and capture image you are " + face.faceAttributes.gender.toUpperCase() + " with age of " + getAgeRange(face.faceAttributes.age) + " and you are a " + getEmotion(emotion));
                 }
             }
         }

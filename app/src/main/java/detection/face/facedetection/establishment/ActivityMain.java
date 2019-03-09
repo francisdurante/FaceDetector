@@ -33,6 +33,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.text.DecimalFormat;
 
 import detection.face.facedetection.R;
 import detection.face.facedetection.establishment.main.MainDAO;
@@ -692,8 +693,11 @@ public class ActivityMain extends AppCompatActivity {
                                     .placeholder(R.drawable.default_image_thumbnail)
                                     .into(productImageView);
 
+                            DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+                            decimalFormat.setGroupingUsed(true);
+                            decimalFormat.setGroupingSize(3);
                             itemNameView.setText(itemName[x]);
-                            itemPriceView.setText("PHP " + itemPrice[x]);
+                            itemPriceView.setText("PHP " + decimalFormat.format(Double.parseDouble(itemPrice[x])));
                             itemCategoryView.setText(itemCategory[x]);
 
                             linearLayout.addView(view);
@@ -785,10 +789,14 @@ public class ActivityMain extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+                decimalFormat.setGroupingUsed(true);
+                decimalFormat.setGroupingSize(3);
+
                 hideProgressBar();
                 categoryName.setSelection(cat.getPosition(vo.getItemCategory()));
                 statusItem.setSelection(status.getPosition(vo.getItemStatus()));
-                price.setText(Double.toString(vo.getPrice()));
+                price.setText(decimalFormat.format(vo.getPrice()));
                 currentItemName.setText(itemName);
                 itemId = Integer.parseInt(vo.getItemId());
                 oldPathItem = vo.getItemPicPath();

@@ -91,8 +91,7 @@
             android:layout_marginEnd="43dp"
             android:gravity="center"
             android:onClick="registration"
-            android:text="Not Register\nClick Here!"
-            android:textColor="#3e85ef" />
+            android:text="@string/not_register_nclick_here" />
 
 
     </RelativeLayout>
@@ -105,10 +104,11 @@
         android:orientation="vertical">
         <ImageButton
             android:id="@+id/establishment_login_button"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5sp"
             android:background="#00ffffff"
-            android:src="@drawable/ic_arrow_point_to_right"
+            android:src="@drawable/ic_add_contact"
             android:paddingEnd="15sp"
             />
         <!--<TextView-->

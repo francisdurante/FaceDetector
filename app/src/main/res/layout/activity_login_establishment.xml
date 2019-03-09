@@ -32,7 +32,8 @@
         android:padding="20sp"
         android:inputType="text"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"/>
+        android:layout_marginEnd="30dp"
+        android:textColor="#FFF"/>
     <EditText
         android:id="@+id/password_login"
         android:layout_width="match_parent"
@@ -46,7 +47,8 @@
         android:textColorHint="#fff"
         android:padding="20sp"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"/>
+        android:layout_marginEnd="30dp"
+        android:textColor="#FFF"/>
 
     <Button
         android:id="@+id/button_login"
@@ -61,6 +63,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/rounded_button_green"
-        android:text="LOGIN"/>
+        android:text="LOGIN"
+        android:textColor="#FFF"/>
 
 </RelativeLayout>

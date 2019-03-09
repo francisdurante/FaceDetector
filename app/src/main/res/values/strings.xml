@@ -118,6 +118,7 @@
     <string name="neutral">Neutral</string>
     <string name="disagree">Disagree</string>
     <string name="strongly_disagree">Strongly Disagree</string>
+    <string name="not_register_nclick_here"><font color="#ffffff">Not Register</font>\n<font color="#3e85ef">Click Here!</font></string>
 
     <string-array name="emotion_item">
         <item>HAPPY</item>

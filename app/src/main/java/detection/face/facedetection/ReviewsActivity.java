@@ -3,6 +3,7 @@ package detection.face.facedetection;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
@@ -171,6 +172,7 @@ public class ReviewsActivity extends AppCompatActivity {
             rateBar.setMax(5);
             rateBar.setStepSize(1f);
             final EditText input = new EditText(getApplicationContext());
+            input.setTextColor(Color.parseColor("#FFF"));
             input.setHint("Write a comment...   ");
             LinearLayout ll = new LinearLayout(ReviewsActivity.this);
             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(

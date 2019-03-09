@@ -32,7 +32,7 @@ public class Constant {
     public static final int PICK_PHOTO_REQUEST_PROFILE = 1999;
     public static final int PICK_PHOTO_REQUEST_ITEM = 1888;
     public static final int PICK_PHOTO_REQUEST_ADD = 1777;
-    public static final String SUBMITTING = "Submiting...";
+    public static final String SUBMITTING = "Submitting...";
 
     //URL API
     public static final String GET_EST_INFORMATION = "http://darkened-career.000webhostapp.com/api/get_all_est_user";

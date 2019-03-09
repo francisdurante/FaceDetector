@@ -7,7 +7,7 @@
     <string name="search_text">Search…</string>
     <string name="product_list_label">PRODUCT LIST</string>
     <string name="show_review"><b>Rate this Establishment</b></string>
-    <string name="show_review_01"><b>Show Review</b></string>
+    <string name="show_review_01"><b>SHOW REVIEW</b></string>
     <string name="comment_section"><b>REVIEWS</b></string>
     <string-array name="filter">
         <item>Establishment</item>

@@ -51,14 +51,14 @@
 
     <TextView
         android:id="@+id/age"
-        android:layout_width="wrap_content"
+        android:layout_width="172dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/gender"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="90dp"
+        android:layout_marginStart="106dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="90dp"
+        android:layout_marginEnd="106dp"
         android:text=""
         android:textColor="#FFF" />
 
@@ -119,13 +119,5 @@
         android:text="@string/search_main"
         android:onClick="searchOnclick"/>
 
-
-    <!--<Button-->
-        <!--android:id="@+id/logout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:onClick="logout"-->
-        <!--android:text="Logout" />-->
-    <!--android:text="CREATED BY FRANCIS DURANTE - POWERED BY MICROSOFT API" />-->
 
 </RelativeLayout>

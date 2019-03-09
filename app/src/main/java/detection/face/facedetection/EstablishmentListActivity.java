@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -42,7 +43,7 @@ public class EstablishmentListActivity extends AppCompatActivity {
     int lenght;
     LinearLayout scrollView;
     TextView searchKey;
-    Button searchButton;
+    ImageButton searchButton;
     Spinner mSpinner;
     SharedPreferences spf;
     PopupMenu popupMenu;
@@ -281,7 +282,7 @@ public class EstablishmentListActivity extends AppCompatActivity {
     public void restaurantOnClick(View v){
         if(scrollView.getChildCount() != 0)
             scrollView.removeAllViews();
-        getEstRegistered("","Bake Shop","");
+        getEstRegistered("","","");
     }
     public void showProgressBar(){
         mDialog = new ProgressDialog(EstablishmentListActivity.this);

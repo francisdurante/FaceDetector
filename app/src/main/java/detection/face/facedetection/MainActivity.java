@@ -64,14 +64,13 @@ public class MainActivity extends Activity {
             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, Constant.CAMERA_REQUEST);
         }
-        questionTrigger = getIntent().getExtras().getInt("QUESTION_TRIGGER");
-        resultInQuestion = getIntent().getExtras().getString("RESULT_QUESTION");
+        if(null != getIntent().getExtras()) {
+            questionTrigger = getIntent().getExtras().getInt("QUESTION_TRIGGER");
+            resultInQuestion = getIntent().getExtras().getString("RESULT_QUESTION");
+        }
         if(1 == questionTrigger) {
             save("ANSWERED_SURVEY_" + getString("account_id"),"1");
             resultSurvey = findViewById(R.id.result_survey);
-//            age.setVisibility(View.GONE);
-//            gender.setVisibility(View.GONE);
-//            smile.setVisibility(View.GONE);
 
         }
     }
@@ -196,7 +195,7 @@ public class MainActivity extends Activity {
                         faceRectangle.top + faceRectangle.height,
                         paint);
 
-                gender.setText("GENDER: " + face.faceAttributes.gender);
+                gender.setText("GENDER: " + face.faceAttributes.gender.toUpperCase());
                 age.setText("AGE: " + getAgeRange(face.faceAttributes.age));
                 Double[] emotion = {face.faceAttributes.emotion.anger,
                         face.faceAttributes.emotion.happiness,
@@ -209,7 +208,7 @@ public class MainActivity extends Activity {
                     smile.setText("");
                     age.setText("");
                     gender.setText("");
-                    resultSurvey.setText("Based in our question and capture image you are " + face.faceAttributes.gender.toUpperCase() + " with age of " + getAgeRange(face.faceAttributes.age) + " and you are a " + getEmotion(emotion));
+                    resultSurvey.setText("Based in our question and capture image you are " + face.faceAttributes.gender.toUpperCase() + " with age of " + getAgeRange(face.faceAttributes.age) + " and you are " + getEmotion(emotion));
                 }
             }
         }

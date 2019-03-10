@@ -143,6 +143,13 @@ public class ActivityMain extends AppCompatActivity {
                 startActivity(new Intent(mContext,ActivityLogin.class));
                 finish();
             });
+
+            ab.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
             AlertDialog a = ab.create();
             a.show();
         });

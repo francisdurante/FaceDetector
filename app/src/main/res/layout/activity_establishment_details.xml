@@ -30,22 +30,6 @@
             android:textColor="#FFF"
             android:textSize="40sp" />
 
-        <Button
-            android:id="@+id/navigate_est"
-            android:layout_width="166dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="10dp"
-            android:layout_toStartOf="@+id/rate_link"
-            android:background="@drawable/rounded_button"
-            android:onClick="map"
-            android:paddingStart="10dp"
-            android:paddingEnd="20dp"
-            android:text="DIRECTION"
-            android:layout_marginBottom="5dp"
-            android:textSize="10sp"/>
 
         <TextView
             android:id="@+id/product_list_label"
@@ -59,26 +43,55 @@
             android:textColor="#FFF"
             android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/rate_link"
-            android:layout_width="162dp"
-            android:layout_height="48dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/rounded_button"
-            android:gravity="center"
-            android:onClick="showReviews"
-            android:text="@string/show_review_01"
-            android:textColor="#FFF"
-            android:textSize="10sp"
-            android:layout_marginBottom="5dp"/>
+<LinearLayout
+    android:id="@+id/linear_buttons"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal"
+    android:weightSum="2">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <Button
+            android:id="@+id/navigate_est"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/rounded_button"
+            android:onClick="map"
+            android:text="DIRECTION"
+            android:layout_marginBottom="5dp"
+            android:textSize="15sp"
+            android:layout_marginEnd="5sp"/>
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <Button
+                android:layout_marginStart="5sp"
+                android:id="@+id/rate_link"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/rounded_button"
+                android:gravity="center"
+                android:onClick="showReviews"
+                android:text="@string/show_review_01"
+                android:textColor="#FFF"
+                android:textSize="15sp"
+                android:layout_marginBottom="5dp"/>
+        </LinearLayout>
+</LinearLayout>
         <ScrollView
             android:id="@+id/product_list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/rate_link"
+            android:layout_above="@+id/linear_buttons"
             android:layout_below="@+id/product_list_label"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"

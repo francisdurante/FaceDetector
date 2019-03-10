@@ -21,6 +21,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+
 import cz.msebera.android.httpclient.Header;
 
 public class EstablishmentDetailsActivity extends AppCompatActivity {
@@ -77,7 +79,9 @@ public class EstablishmentDetailsActivity extends AppCompatActivity {
                             noResultFound = findViewById(R.id.no_result_found);
                             noResultFound.setVisibility(View.VISIBLE);
                         }
-
+                        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+                        decimalFormat.setGroupingUsed(true);
+                        decimalFormat.setGroupingSize(3);
                         for (int x = 0; x < length; x++) {
                             String array = data.getString(x);
                             JSONObject datas = new JSONObject(array);
@@ -95,7 +99,7 @@ public class EstablishmentDetailsActivity extends AppCompatActivity {
 
                                 TextView prodPrice = view.findViewById(R.id.product_price);
                                 prodPrice.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));
-                                prodPrice.setText("PHP "+datas.getString("price"));
+                                prodPrice.setText("Php "+decimalFormat.format(Double.parseDouble(datas.getString("price"))));
 
                                 TextView productCategory = view.findViewById(R.id.product_category);
                                 productCategory.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.common_google_signin_btn_text_dark_default));

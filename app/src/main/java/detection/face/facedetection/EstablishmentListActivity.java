@@ -282,7 +282,7 @@ public class EstablishmentListActivity extends AppCompatActivity {
     public void restaurantOnClick(View v){
         if(scrollView.getChildCount() != 0)
             scrollView.removeAllViews();
-        getEstRegistered("","","");
+        getEstRegistered("","Eatery","");
     }
     public void showProgressBar(){
         mDialog = new ProgressDialog(EstablishmentListActivity.this);

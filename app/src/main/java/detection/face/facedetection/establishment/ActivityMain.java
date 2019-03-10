@@ -697,7 +697,7 @@ public class ActivityMain extends AppCompatActivity {
                             decimalFormat.setGroupingUsed(true);
                             decimalFormat.setGroupingSize(3);
                             itemNameView.setText(itemName[x]);
-                            itemPriceView.setText("PHP " + decimalFormat.format(Double.parseDouble(itemPrice[x])));
+                            itemPriceView.setText("Php " + decimalFormat.format(Double.parseDouble(itemPrice[x])));
                             itemCategoryView.setText(itemCategory[x]);
 
                             linearLayout.addView(view);
